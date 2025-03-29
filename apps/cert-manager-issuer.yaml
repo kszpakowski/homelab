@@ -6,7 +6,7 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager-issuer
+    namespace: cert-manager
   project: default
   source:
     path: cert-manager-issuer
