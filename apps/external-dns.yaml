@@ -7,20 +7,23 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://kubernetes-sigs.github.io/external-dns/
-    targetRevision: 1.16.0
-    chart: external-dns
-    helm:
-      valuesObject:
-        provider:
-          name: cloudflare
-        env:
-          - name: CF_API_TOKEN
-            valueFrom:
-              secretKeyRef:
-                name: cloudflare-api-key
-                key: apiKey
+  sources:
+    - repoURL: https://kubernetes-sigs.github.io/external-dns/
+      targetRevision: 1.16.0
+      chart: external-dns
+      helm:
+        valuesObject:
+          provider:
+            name: cloudflare
+          env:
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-api-key
+                  key: apiKey
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      path: external-dns-config
+      targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: external-dns

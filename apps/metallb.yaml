@@ -7,14 +7,17 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://metallb.github.io/metallb
-    targetRevision: 0.14.9
-    chart: metallb
-    helm:
-      values: |
-        speaker:
-          ignoreExcludeLB: true
+  sources:
+    - repoURL: https://metallb.github.io/metallb
+      targetRevision: 0.14.9
+      chart: metallb
+      helm:
+        valuesObject:
+          speaker:
+            ignoreExcludeLB: true
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      path: metallb-config
+      targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
