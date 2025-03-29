@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.0-rc3/manifests/install.yaml
 - ingress.yaml
+- tls-cert.yaml
 patches:
 - path: argocd-cmd-params-cm.yaml
