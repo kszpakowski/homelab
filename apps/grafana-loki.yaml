@@ -38,6 +38,9 @@ spec:
         minio:
           enabled: true
 
+        chunksCache:
+          enabled: false
+
         deploymentMode: SingleBinary
 
         singleBinary:
