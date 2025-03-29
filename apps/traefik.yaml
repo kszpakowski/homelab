@@ -16,7 +16,7 @@ spec:
       valuesObject:
         service:
           annotations:
-            external-dns.alpha.kubernetes.io/hostname: kszpakowski.com
+            external-dns.alpha.kubernetes.io/hostname: "*.homelab.kszpakowski.com"
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
