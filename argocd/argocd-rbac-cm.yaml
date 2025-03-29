@@ -7,6 +7,6 @@ metadata:
   name: argocd-rbac-cm
 data:
   policy.csv: |
-    g, kszpakowski, role:admin
+    g, karol.szpakowski@gmail.com, role:admin
   policy.default: role:readonly
   scopes: '[groups, email]'
