@@ -4,7 +4,7 @@ metadata:
   name: argocd-cm
 data:
   url: https://argocd.homelab.kszpakowski.com
-
+  admin.enabled: "false"
   dex.config: |
     connectors:
       - type: github
