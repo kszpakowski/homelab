@@ -10,10 +10,13 @@ spec:
     server: https://kubernetes.default.svc
     namespace: cert-manager
   project: default
-  source:
-    path: cert-manager
-    repoURL: https://github.com/kszpakowski/homelab.git
-    targetRevision: HEAD
+  sources:
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      path: cert-manager
+      targetRevision: HEAD
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      path: cert-manager-issuer
+      targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
