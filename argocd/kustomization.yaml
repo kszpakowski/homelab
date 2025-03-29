@@ -5,7 +5,7 @@ resources:
 - ingress.yaml
 - tls-cert.yaml
 - github-dex-client-secret-sealedsecret.yaml
+- argocd-rbac-cm.yaml
 patches:
 - path: argocd-cmd-params-cm.yaml
 - path: argocd-cm.yaml
-- path: argocd-rbac-cm.yaml
