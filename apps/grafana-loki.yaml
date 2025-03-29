@@ -36,15 +36,7 @@ spec:
               allow_structured_metadata: true
               volume_enabled: true
 
-          deploymentMode: SimpleScalable
-
-          backend:
-            replicas: 1
-          read:
-            replicas: 1
-          write:
-            replicas: 1
-
+          deploymentMode: Monolithic
 
           # Enable minio for storage
           minio:
