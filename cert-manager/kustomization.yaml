@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.yaml
 - cloudflare/cloudflare-api-token-sealedsecret.yaml
-- issuers/acme/letsencrypt-acme-issuer.yaml
+- cloudflare/letsencrypt-acme-issuer.yaml
