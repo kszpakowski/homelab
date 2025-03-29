@@ -13,11 +13,10 @@ spec:
     targetRevision: 34.4.1
     helm:
       releaseName: traefik
-      values: |
-        # Custom Helm values can be specified here
-        # Example:
-        # service:
-        #   type: LoadBalancer
+      valuesObject:
+        service:
+          annotations:
+            external-dns.alpha.kubernetes.io/hostname: kszpakowski.com
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
