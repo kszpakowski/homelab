@@ -1,0 +1,11 @@
+data:
+  url: https://argocd.homelab.kszpakowski.com
+
+  dex.config: |
+    connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: e2ae5b8b705e0c0f16c7
+          clientSecret: $github-dex-client-secret:dex.github.clientSecret
