@@ -11,8 +11,8 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.29.0
-    chart: loki
+    targetRevision: 1.8.11
+    chart: loki-simple-scalable
     helm:
       valuesObject:
          loki:
