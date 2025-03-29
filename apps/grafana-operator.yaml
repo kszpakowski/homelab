@@ -7,10 +7,13 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-  source:
-    repoURL: https://grafana.github.io/helm-charts
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
     targetRevision: v5.17.0
     chart: grafana-operator
+  - repoURL: https://github.com/kszpakowski/homelab.git
+    path: grafana
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: grafana-operator
