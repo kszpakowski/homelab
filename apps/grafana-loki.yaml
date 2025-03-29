@@ -11,11 +11,11 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 1.8.11
-    chart: loki-simple-scalable
+    targetRevision: 6.29.0
+    chart: loki
     helm:
       valuesObject:
-         loki:
+        loki:
           commonConfig:
             replication_factor: 1
           schemaConfig:
@@ -35,40 +35,40 @@ spec:
           ruler:
             enable_api: true
 
-          minio:
-            enabled: true
+        minio:
+          enabled: true
 
-          deploymentMode: SingleBinary
+        deploymentMode: SingleBinary
 
-          singleBinary:
-            replicas: 1
+        singleBinary:
+          replicas: 1
 
-          # Zero out replica counts of other deployment modes
-          backend:
-            replicas: 0
-          read:
-            replicas: 0
-          write:
-            replicas: 0
+        # Zero out replica counts of other deployment modes
+        backend:
+          replicas: 0
+        read:
+          replicas: 0
+        write:
+          replicas: 0
 
-          ingester:
-            replicas: 0
-          querier:
-            replicas: 0
-          queryFrontend:
-            replicas: 0
-          queryScheduler:
-            replicas: 0
-          distributor:
-            replicas: 0
-          compactor:
-            replicas: 0
-          indexGateway:
-            replicas: 0
-          bloomCompactor:
-            replicas: 0
-          bloomGateway:
-            replicas: 0
+        ingester:
+          replicas: 0
+        querier:
+          replicas: 0
+        queryFrontend:
+          replicas: 0
+        queryScheduler:
+          replicas: 0
+        distributor:
+          replicas: 0
+        compactor:
+          replicas: 0
+        indexGateway:
+          replicas: 0
+        bloomCompactor:
+          replicas: 0
+        bloomGateway:
+          replicas: 0
   project: default
   syncPolicy:
     automated:
