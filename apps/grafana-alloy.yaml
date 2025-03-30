@@ -29,7 +29,7 @@ spec:
                     __path__  = "/var/log/syslog",
                     job       = "node/syslog",
                     node_name = sys.env("HOSTNAME"),
-                    cluster   = homelab-talos,
+                    cluster   = "homelab-talos",
                 }]
               }
 
@@ -37,7 +37,7 @@ spec:
                 targets    = local.file_match.node_logs.targets
                 forward_to = [loki.write.default.receiver]
               }
-              
+
   project: default
   syncPolicy:
     automated:
