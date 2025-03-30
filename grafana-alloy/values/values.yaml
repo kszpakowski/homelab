@@ -1,3 +1,4 @@
+# TODO  - set external cm in values object of argo app and create cm from file using kustomize
 alloy:
   configMap:
     content: |-
