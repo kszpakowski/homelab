@@ -34,7 +34,7 @@ spec:
         {
           "datasource": {
             "type": "loki",
-            "uid": "f1d4c1b1-5351-426c-91e7-ed1408f5bae1"
+            "uid": "805bc886-8cb7-4575-999a-6a29295c0d31"
           },
           "fieldConfig": {
             "defaults": {},
