@@ -13,6 +13,31 @@ spec:
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: "0.12.5"
     chart: alloy
+    helm:
+      valuesObject:
+        alloy:
+          configMap:
+            content: |-
+              loki.write "default" {
+                endpoint {
+                  url = "loki.loki:3100/loki/api/v1/push"
+                }
+              }
+
+              local.file_match "node_logs" {
+                path_targets = [{
+                    __path__  = "/var/log/syslog",
+                    job       = "node/syslog",
+                    node_name = sys.env("HOSTNAME"),
+                    cluster   = homelab-talos,
+                }]
+              }
+
+              loki.source.file "node_logs" {
+                targets    = local.file_match.node_logs.targets
+                forward_to = [loki.write.default.receiver]
+              }
+              
   project: default
   syncPolicy:
     automated:
