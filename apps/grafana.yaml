@@ -1,23 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-operator
+  name: grafana
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
-  source:
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: v5.17.0
-    chart: grafana-operator
   destination:
     server: https://kubernetes.default.svc
-    namespace: grafana-operator
+    namespace: grafana
+  project: default
+  sources:
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      path: grafana
+      targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
-    - ServerSideApply=true
+        - CreateNamespace=true
