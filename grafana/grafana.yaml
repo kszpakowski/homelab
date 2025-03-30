@@ -39,12 +39,85 @@ spec:
       dashboards: "grafana"
   json: >
     {
-      "title": "Simple Dashboard",
-      "timezone": "browser",
-      "refresh": "5s",
-      "panels": [],
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": false,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 3,
+      "links": [],
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "f1d4c1b1-5351-426c-91e7-ed1408f5bae1"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "pluginVersion": "11.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "f1d4c1b1-5351-426c-91e7-ed1408f5bae1"
+              },
+              "editorMode": "builder",
+              "expr": "{cluster=\"homelab-talos\"} | logfmt",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "title": "Cluster logs",
+          "type": "logs"
+        }
+      ],
+      "preload": false,
+      "schemaVersion": 40,
+      "tags": [],
+      "templating": {
+        "list": []
+      },
       "time": {
         "from": "now-6h",
         "to": "now"
-      }
+      },
+      "timepicker": {},
+      "timezone": "browser",
+      "title": "New dashboard",
+      "uid": "dehe2o9g0mh34e",
+      "version": 1,
+      "weekStart": ""
     }
