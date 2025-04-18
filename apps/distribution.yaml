@@ -11,6 +11,12 @@ spec:
     - repoURL: https://helm.twun.io
       targetRevision: 2.2.3
       chart: docker-registry
+      helm:
+        valueFiles:
+          - $values/distribution/values/values.yaml
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      targetRevision: HEAD
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: distribution
