@@ -18,7 +18,7 @@ spec:
           - $values/grafana-alloy/values/values.yaml
     - repoURL: https://github.com/kszpakowski/homelab.git
       targetRevision: HEAD
-      ref: values        
+      ref: values
   project: default
   syncPolicy:
     automated:
