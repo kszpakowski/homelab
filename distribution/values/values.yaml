@@ -1,5 +1,0 @@
-ingress:
-  enabled: true
-  className: traefik
-  hosts:
-    - registry.homelab.kszpakowski.com
