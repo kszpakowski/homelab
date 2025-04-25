@@ -9,7 +9,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  value: "2"
+  value: "3"
 kind: ConfigMap
 metadata:
   annotations:
