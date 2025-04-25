@@ -13,3 +13,9 @@ data:
         config:
           clientID: e2ae5b8b705e0c0f16c7
           clientSecret: $github-dex-client-secret:clientSecret
+    staticClients:
+      - id: argo-workflows-sso
+        name: Argo Workflow
+        redirectURIs:
+          - https://workflows.homelab.kszpakowski.com/oauth2/callback
+        secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
