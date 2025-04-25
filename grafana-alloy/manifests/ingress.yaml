@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alloy
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - hosts:
+      - alloy.homelab.kszpakowski.com
+      secretName: alloy-cert
+  rules:
+  - host: alloy.homelab.kszpakowski.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-alloy
+            port:
+              name: http-metrics

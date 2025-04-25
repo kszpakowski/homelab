@@ -6,12 +6,12 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: source-hydrator-test
+    namespace: hydrator-test
   sourceHydrator:
     drySource:
       repoURL: https://github.com/kszpakowski/homelab.git
-      path: local-path-provisioner
+      path: hydrator-test
       targetRevision: HEAD
     syncSource:
       targetBranch: environments/prod
-      path: local-path-provisioner
+      path: hydrator-test
