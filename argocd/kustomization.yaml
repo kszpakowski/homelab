@@ -5,6 +5,7 @@ resources:
 - ingress.yaml
 - tls-cert.yaml
 - github-dex-client-secret-sealedsecret.yaml
+- argocd-hydrator-secret-sealedsecret.yaml
 patches:
 - path: argocd-cmd-params-cm.yaml
 - path: argocd-cm.yaml
