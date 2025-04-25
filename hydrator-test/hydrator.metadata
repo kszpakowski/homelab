@@ -1,6 +1,6 @@
 {
   "repoURL": "https://github.com/kszpakowski/homelab.git",
-  "drySha": "92aaca9b94d4750cc0e692e00b3e926fabe630de",
+  "drySha": "6b9b31556788c0b81fd947312b8dba1a6b54db2e",
   "commands": [
     "kustomize build ./hydrator-test"
   ]
