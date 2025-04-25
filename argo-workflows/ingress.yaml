@@ -8,7 +8,7 @@ spec:
   tls:
     - hosts:
       - workflows.homelab.kszpakowski.com
-      secretName: grafana-cert
+      secretName: argo-cert
   rules:
   - host: "workflows.homelab.kszpakowski.com"
     http:
