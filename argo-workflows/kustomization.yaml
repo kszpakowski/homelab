@@ -2,17 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - https://github.com/argoproj/argo-workflows/releases/download/v3.6.5/install.yaml
-- server-transport.yaml
 - ingress.yaml
 patches:
   - target:
-      kind: Service
+      kind: Deployment
       name: argo-server
     patch: |
       - op: add
-        path: "/metadata/annotations/traefik.ingress.kubernetes.io~1service.serversscheme"
-        value: https
-      - op: add
-        path: "/metadata/annotations/traefik.ingress.kubernetes.io~1service.serverstransport"
-        value: argo-https-insecure@kubernetescrd
-     
+        path: "/spec/template/spec/containers/0/args/-"
+        value: --secure=false
