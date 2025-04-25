@@ -7,6 +7,6 @@ To hydrate the manifests in this repository, run the following commands:
 
 git clone https://github.com/kszpakowski/homelab.git
 # cd into the cloned directory
-git checkout 3d9259925c8663b474985fe3aaeee409ea1822aa
+git checkout 1b5ab44b050b8ffe0439bc64f5d82f3d2081b11e
 kustomize build ./hydrator-test
 ```
