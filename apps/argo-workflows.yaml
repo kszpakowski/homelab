@@ -7,14 +7,18 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name: ''
     namespace: argo
-    server: 'https://kubernetes.default.svc'
-  source:
-    path: argo-workflows
-    repoURL: 'https://github.com/kszpakowski/homelab.git'
-    targetRevision: HEAD
-  sources: []
+    server: "https://kubernetes.default.svc"
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 0.45.12
+      chart: argo-workflows
+      helm:
+        valueFiles:
+          - $values/argo-workflows/values/values.yaml
+    - repoURL: https://github.com/kszpakowski/homelab.git
+      targetRevision: HEAD
+      ref: values
   project: default
   syncPolicy:
     automated:
