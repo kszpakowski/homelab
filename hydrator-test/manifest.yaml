@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  value: "1"
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: source-hydrated-app:/ConfigMap:/cm-a
+  name: cm-a
+---
+apiVersion: v1
+data:
+  value: "2"
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: source-hydrated-app:/ConfigMap:/cm-b
+  name: cm-b
