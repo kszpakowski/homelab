@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: source-hydrated-app
 spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: source-hydrator-test
   sourceHydrator:
     drySource:
       repoURL: https://github.com/kszpakowski/homelab.git
