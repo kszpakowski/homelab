@@ -11,7 +11,7 @@ spec:
       secretName: grafana-cert
   rules:
   - host: "workflows.homelab.kszpakowski.com"
-    http:
+    https:
       paths:
       - path: /
         pathType: Prefix
