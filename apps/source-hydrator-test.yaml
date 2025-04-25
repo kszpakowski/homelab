@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: source-hydrated-app
+spec:
+  sourceHydrator:
+    drySource:
+      repoURL: https://github.com/kszpakowski/homelab.git
+      path: local-path-provisioner
+      targetRevision: HEAD
+    syncSource:
+      targetBranch: environments/prod
+      path: local-path-provisioner
