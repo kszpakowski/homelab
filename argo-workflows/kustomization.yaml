@@ -5,4 +5,13 @@ resources:
 - server-transport.yaml
 - ingress.yaml
 patches:
-  - patch: service-patch.yaml
+  - target:
+      kind: Service
+      name: argo-server
+    patch: |
+      - op: add
+        path: "/metadata/annotations/traefik.ingress.kubernetes.io~1service.serversscheme"
+        value: https
+      - op: add
+        path: "/metadata/annotations/traefik.ingress.kubernetes.io~1ervice.serverstransport"
+        value: argo-https-insecure@kubernetescrd
