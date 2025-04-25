@@ -17,6 +17,9 @@ spec:
         service:
           annotations:
             external-dns.alpha.kubernetes.io/hostname: "*.homelab.kszpakowski.com"
+        ingressRoute:
+          dashboard:
+            enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
