@@ -15,3 +15,9 @@ spec:
     syncSource:
       targetBranch: environments/prod
       path: hydrator-test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+        - CreateNamespace=true
