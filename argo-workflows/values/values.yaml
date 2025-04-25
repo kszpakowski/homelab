@@ -748,8 +748,8 @@ server:
       secretWhitelist: []
     # -- Scopes requested from the SSO ID provider
     ## The 'groups' scope requests group membership information, which is usually used for authorization decisions.
-    scopes: []
-      # - groups
+    scopes:
+      - groups
     # -- Define how long your login is valid for (in hours)
     ## If omitted, defaults to 10h.
     sessionExpiry: ""
