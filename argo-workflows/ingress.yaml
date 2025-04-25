@@ -4,8 +4,6 @@ metadata:
   name: argo-workflows
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: argo-https-insecure@kubernetescrd
 spec:
   tls:
     - hosts:
