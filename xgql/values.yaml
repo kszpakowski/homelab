@@ -18,7 +18,8 @@ affinity: {}
 args: [
   # "--cache-expiry=336h",
   # "--help"
-  "--debug"
+  "--debug",
+  "--enable-playground"
 ]
 
 # imagePullSecrets:
