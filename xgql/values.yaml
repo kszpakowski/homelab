@@ -4,7 +4,7 @@ deploymentStrategy: RollingUpdate
 
 image:
   repository: upbound/xgql
-  tag: v0.2.0-rc.0.175.g0fa8ed6-main
+  tag: v0.2.0-rc.0.172.g226a95d-main
   pullPolicy: Always
 
 nodeSelector: {}
