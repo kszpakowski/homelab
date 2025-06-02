@@ -18,6 +18,7 @@ affinity: {}
 args: [
   # "--cache-expiry=336h",
   # "--help"
+  "--debug"
 ]
 
 # imagePullSecrets:
