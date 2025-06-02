@@ -19,7 +19,8 @@ args: [
   # "--cache-expiry=336h",
   # "--help"
   "--debug",
-  "--enable-playground"
+  "--enable-playground",
+  "--listen-insecure=127.0.0.1:8080"
 ]
 
 # imagePullSecrets:
