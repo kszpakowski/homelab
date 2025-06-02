@@ -15,10 +15,10 @@ affinity: {}
 # tlsSecret: xgql-certs
 # args: {"--tls-key=/tls/tls.key", "--tls-cert=/tls/tls.crt"}
 
-args: {
-  "--cache-expiry=336h",
+args: [
+  # "--cache-expiry=336h",
   "--help"
-}
+]
 
 # imagePullSecrets:
 # - dockerhub
