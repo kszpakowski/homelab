@@ -16,7 +16,8 @@ affinity: {}
 # args: {"--tls-key=/tls/tls.key", "--tls-cert=/tls/tls.crt"}
 
 args: {
-  "--cache-expiry=336h"
+  "--cache-expiry=336h",
+  "--help"
 }
 
 # imagePullSecrets:
