@@ -8,9 +8,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.upbound.io/stable #https://charts.crossplane.io/stable
-    targetRevision: 2.0.2-up.1 #1.20.0
-    chart: crossplane
+    repoURL: 'https://github.com/kszpakowski/homelab.git' # https://charts.upbound.io/stable #https://charts.crossplane.io/stable
+    path: crossplane
+    targetRevision: HEAD
+    # targetRevision: 2.0.2-up.1 #1.20.0
+    # chart: crossplane
   destination:
     server: https://kubernetes.default.svc
     namespace: crossplane-system
