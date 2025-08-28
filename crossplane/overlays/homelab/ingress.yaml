@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+  name: crossplane-ui
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`crossplane.homelab.kszpakowski.com`)
+    priority: 10
+    services:
+    - name: webui
+      port: 80
+  tls:
+    secretName: crossplane-tls
