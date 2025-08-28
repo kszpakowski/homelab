@@ -8,16 +8,16 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/kszpakowski/homelab.git' # https://charts.upbound.io/stable #https://charts.crossplane.io/stable
+    repoURL: 'https://github.com/kszpakowski/homelab.git'
     path: crossplane/overlays/homelab
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: crossplane-system
   syncPolicy:
-    # automated:
-    #   prune: true
-    #   selfHeal: true
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
   
