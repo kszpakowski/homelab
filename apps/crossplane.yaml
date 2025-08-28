@@ -11,8 +11,6 @@ spec:
     repoURL: 'https://github.com/kszpakowski/homelab.git' # https://charts.upbound.io/stable #https://charts.crossplane.io/stable
     path: crossplane/overlays/homelab
     targetRevision: HEAD
-    kustomize:
-      enableHelm: true
   destination:
     server: https://kubernetes.default.svc
     namespace: crossplane-system

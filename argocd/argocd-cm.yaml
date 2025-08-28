@@ -5,6 +5,7 @@ metadata:
 data:
   url: https://argocd.homelab.kszpakowski.com
   admin.enabled: "false"
+  kustomize.buildOptions: --enable-helm
   dex.config: |
     connectors:
       - type: github
