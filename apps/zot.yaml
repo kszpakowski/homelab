@@ -11,6 +11,10 @@ spec:
     - repoURL: http://zotregistry.dev/helm-charts
       targetRevision: "0.1.79"
       chart: zot
+      helm:
+        valuesObject:
+          image:
+            repository: ghcr.io/project-zot/zot-linux-arm64
   destination:
     server: https://kubernetes.default.svc
     namespace: zot
