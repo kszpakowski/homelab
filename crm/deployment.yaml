@@ -17,9 +17,9 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
-          # env:
-          #   - name: DB_URL
-          #     valueFrom:
-          #       configMapKeyRef:
-          #         name: db-config
-          #         key: DB_URL
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_URL
