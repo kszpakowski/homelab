@@ -1,18 +1,25 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: crm-error
+  name: crm
 spec:
-  restartPolicy: Never
-  containers:
-    - name: crm-main
-      image: bash:5.2
-      command:
-        - bash
-        - -lc
-        - |
-          sleep_time=$((10 + RANDOM % 6))
-          sleep "$sleep_time"
-          errors=("Disk failure" "Null pointer exception" "Segmentation fault" "Out of memory" "Network timeout")
-          printf '%s\n' "${errors[$RANDOM % ${#errors[@]}]}" >&2
-          exit 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-app
+  template:
+    metadata:
+      labels:
+        app: simple-app
+    spec:
+      containers:
+        - name: crm-main
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: DB_URL
