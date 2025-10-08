@@ -64,7 +64,7 @@ spec:
           image: n8nio/n8n
           name: n8n
           ports:
-            - containerPort: 5678
+            - containerPort: 443
           resources:
             requests:
               memory: "250Mi"
