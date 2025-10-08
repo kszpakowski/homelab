@@ -53,6 +53,8 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
+            - name: N8N_SECURE_COOKIE
+              value: "false"
           image: n8nio/n8n
           name: n8n
           ports:
