@@ -55,7 +55,7 @@ spec:
               value: "443"
             - name: N8N_HOST
               value: n8n.homelab.kszpakowski.com
-            - name: N8N_RUNNERS_ENABLED=true
+            - name: N8N_RUNNERS_ENABLED
               value: "true"
             - name: N8N_BLOCK_ENV_ACCESS_IN_NODE
               value: "true"
