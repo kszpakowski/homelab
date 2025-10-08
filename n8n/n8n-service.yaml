@@ -8,7 +8,7 @@ metadata:
 spec:
   ports:
     - name: "n8n"
-      port: 443
+      port: 5678
       targetPort: 5678
       protocol: TCP
   selector:
