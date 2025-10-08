@@ -19,4 +19,4 @@ spec:
               service:
                 name: n8n
                 port:
-                  number: 5678
+                  name: n8n
