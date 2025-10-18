@@ -15,6 +15,9 @@ spec:
         valuesObject:
           image:
             repository: ghcr.io/project-zot/zot-linux-arm64
+    - repoURL: 'https://github.com/kszpakowski/homelab.git'
+      targetRevision: HEAD
+      path: zot
   destination:
     server: https://kubernetes.default.svc
     namespace: zot
