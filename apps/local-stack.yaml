@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: local-stack
+  name: localstack
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,10 +10,10 @@ spec:
   source:
     repoURL: https://localstack.github.io/helm-charts
     targetRevision: "0.6.26"
-    chart: local-stack
+    chart: localstack
   destination:
     server: https://kubernetes.default.svc
-    namespace: local-stack
+    namespace: localstack
   syncPolicy:
     automated:
       prune: true
