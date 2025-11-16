@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: proxmox-data-ext4
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+  storage: data
+  cache: none
+  ssd: "true"
+provisioner: csi.proxmox.sinextra.dev
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
