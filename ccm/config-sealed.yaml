@@ -1,0 +1,17 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/namespace-wide: "true"
+  name: proxmox-cloud-controller-manager
+  namespace: kube-system
+spec:
+  encryptedData:
+    config-ccm.yaml: AgB3QKELg9FjH3d0hG8dej2dTUf6PpRiTFmmnkAaHGlX10/oThstljon0H1lWx6Ww7nfCCJKHq34QPjpDkyQ4J01StFuxbCuCkWUHxH/pEktrLyhQBAlPvFSO3owuKl5W+nzCbJMeuNy9BTU+kzXkpdZb5D+jrzyp9JYoBBQ1mC3NTF5NxhVH0JsMk+LSUg7cFjv03GE9iK65v64AVPPQ0EDEGP+ZACnHyCX/0p659bFO09oufhVW58pJvbbtYXHeYnasxvZM4xqWdW7BcVIhr1DTLaMD9n9/12MFpRW9JDO5obtE78h15SquhO86MivPiUX0s4fVjV4If56LxW3Xc2tGcm2K/0ilWdHjiM97IzI4jOUYt1PcE8xbmdEkeNRuYgm+rHdv73HTlCq5oXfHKO++G9Sp3pxq6J1cFhtGSD/cX89fWyfFszBg1Ua+OfM9VwSAcQF40rVC3IbHaoqWmcLNqVAQYASsW6dY4lW5CPpREJSv6KQyzfiqHnMwOWZ2bSirRgRUTgEk37rNGPST9Puxh9OyIduZfdfp5lWVXO7z1AFrKnGICPAItVnZy/eccHShEWgKraXBShXLqB0CM3ho3X0o0Mvx5kAyKUF2hdw6EvkQWn0YpGbP3zOw8WzQOhwyJKsnsVnSWu4oF3H6j7o6/N8mNnyraidF0IchLCOy+/gFusWvvX5hWAQWvAN3Ih0sYCQoQGcCv7qth8QYYwfx9XN0X/efoXMxsuHsdwLh+7RgPSh1JSFZLIIdjUDjWe+UvEBx9hVFXywOBxpMpnz1uEllHjLyYMqCxPfrftssiJB3QaLa7QDWUBu+paA0f2Zq/ud+qgebE4hQ0pKfL1GIQ0zkGtxH2O1VcrPrLQA9jRGcBCIT/WY6INTBXnuSQ91tZnJ5sMgtDJWizZF2f3Rw9Jzze2qTfHf7dRl7vn0oNmMeo13ITMMWw==
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/namespace-wide: "true"
+      name: proxmox-cloud-controller-manager
+      namespace: kube-system
