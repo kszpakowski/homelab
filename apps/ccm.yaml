@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: ccm
+    namespace: kube-system
     server: 'https://kubernetes.default.svc'
   source:
     path: ccm
