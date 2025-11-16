@@ -30,8 +30,8 @@ kind: CronJob
 metadata:
   name: apply-node-labels
 spec:
-  # schedule: "0 */6 * * *"   # runs every 6 hours
-  schedule: "* * * * *"   # runs every minute (for testing purposes)
+  schedule: "0 */6 * * *"   # runs every 6 hours
+  # schedule: "* * * * *"   # runs every minute (for testing purposes)
   jobTemplate:
     spec:
       template:
