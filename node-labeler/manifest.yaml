@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: node-labeler
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: node-labeler
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: node-labeler
+subjects:
+  - kind: ServiceAccount
+    name: node-labeler
+roleRef:
+  kind: Role
+  name: node-labeler
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: apply-node-labels
+spec:
+  schedule: "0 */6 * * *"   # runs every 6 hours
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: node-labeler
+          restartPolicy: OnFailure
+          containers:
+            - name: node-labeler
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  echo "Applying labels to all nodes..."
+                  
+                  for node in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do
+                    echo "Labeling $node"
+                    for label in $LABELS; do
+                      echo "Applying: $label"
+                      kubectl label node $node $label --overwrite
+                    done
+                  done
+
+              env:
+                - name: LABELS
+                  value: "topology.kubernetes.io/region=homelab topology.kubernetes.io/zone=pve"
