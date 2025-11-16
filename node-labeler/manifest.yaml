@@ -19,7 +19,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: node-labeler
-    namespace: infra
+    namespace: node-labeler
 roleRef:
   kind: ClusterRole
   name: node-labeler
