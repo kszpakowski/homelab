@@ -3,6 +3,4 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/sergelogvinov/proxmox-csi-plugin/main/docs/deploy/proxmox-csi-plugin-release.yml
 - config-sealed.yaml
-patches:
-- path: default-storageclass.yaml
-- path: ns.yaml
+
