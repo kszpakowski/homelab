@@ -4,6 +4,5 @@ metadata:
   name: aws-core-resources
 spec:
   activate:
-  - buckets.s3.aws.m.crossplane.io      # Modern v2 style S3 buckets
-  - instances.rds.aws.m.crossplane.io   # Modern v2 style RDS instances
-  - "*.ec2.aws.m.crossplane.io"         # All modern v2 style EC2 resources
+  - vpcs.ec2.aws.m.upbound.io
+  # - "*.ec2.aws.m.crossplane.io"         # All modern v2 style EC2 resources
