@@ -5,7 +5,7 @@ metadata:
   name: samba-credentials
 type: Opaque
 stringData:
-  ACCOUNT_homelab: "ChangeMe-SuperSecretPassword"
+  ACCOUNT_homelab: "changeme"
   UID_homelab: "1000"
   GROUP_homelab: "1500"
   GROUPS_homelab: "homelab"
