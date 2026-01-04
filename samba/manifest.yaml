@@ -18,7 +18,7 @@ data:
   TZ: "Europe/Warsaw"
   WSDD2_DISABLE: "1"
   AVAHI_DISABLE: "1"
-  SAMBA_VOLUME_CONFIG_data: "[Data]; path=/shares/data; valid users = homelab; guest ok = no; read only = no; browseable = yes; strict sync=no; sync always=no; aio read size=1; aio write size=1; durable handles = no kernel oplocks = yes; posix locking = no; use sendfile=yes"
+  SAMBA_VOLUME_CONFIG_data: "[Data]; path=/shares/data; valid users = homelab; guest ok = no; read only = no; browseable = yes; strict sync=no; sync always=no; aio read size=1; aio write size=1; durable handles = no; kernel oplocks = yes; posix locking = no; use sendfile=yes"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
