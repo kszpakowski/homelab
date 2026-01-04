@@ -7,8 +7,8 @@ type: Opaque
 stringData:
   ACCOUNT_homelab: "changeme"
   UID_homelab: "1000"
-  GROUP_homelabgrp: "1500"
-  GROUPS_homelab: "homelabgrp"
+  # GROUP_homelabgrp: "1500"
+  # GROUPS_homelab: "homelabgrp"
 ---
 apiVersion: v1
 kind: ConfigMap
