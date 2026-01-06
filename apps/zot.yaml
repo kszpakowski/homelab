@@ -13,7 +13,7 @@ spec:
       chart: zot
       helm:
         valuesObject:
-          persistance: true
+          persistence: true
           pvc:
             create: true
             size: 200Gi
