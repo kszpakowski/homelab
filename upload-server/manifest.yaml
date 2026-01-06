@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: upload-server
-          image: zot.homelab.kszpakowski.com/upload-server:0.0.1
+          image: zot.homelab.kszpakowski.com/upload-server:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: api
