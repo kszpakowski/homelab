@@ -11,10 +11,12 @@ spec:
     - repoURL: http://zotregistry.dev/helm-charts
       targetRevision: "0.1.79"
       chart: zot
-      # helm:
-      #   valuesObject:
-      #     image:
-      #       repository: ghcr.io/project-zot/zot-linux-arm64
+      helm:
+        valuesObject:
+          persistance: true
+          pvc:
+            create: true
+            size: 200Gi
     - repoURL: 'https://github.com/kszpakowski/homelab.git'
       targetRevision: HEAD
       path: zot
