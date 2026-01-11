@@ -11,6 +11,19 @@ spec:
     - repoURL: https://victoriametrics.github.io/helm-charts/
       targetRevision: "0.67.0"
       chart: victoria-metrics-k8s-stack
+      helm:
+        valuesObject:
+          grafana:
+            ingress:
+              enabled: true
+              hosts:
+                - grafana.homelab.kszpakowski.com
+              annotations:
+                cert-manager.io/cluster-issuer: letsencrypt
+              tls:
+                - hosts:
+                    - grafana.homelab.kszpakowski.com
+                  secretName: grafana-cert
   destination:
     server: https://kubernetes.default.svc
     namespace: vm-stack
