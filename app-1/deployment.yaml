@@ -18,7 +18,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: AWS_ENDPOINT
-              value: localstack.localstack:4566
+              value: http://localstack.localstack:4566
             - name: tf-jobs-queue-url
               valueFrom:
                 secretKeyRef:
