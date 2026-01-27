@@ -7,4 +7,4 @@ spec:
   - vpcs.ec2.aws.m.upbound.io
   - '*.s3.aws.m.upbound.io'
   - '*.s3.aws.upbound.io'
-  # - "*.ec2.aws.m.crossplane.io"         # All modern v2 style EC2 resources
+  - 'sqs.aws.m.upbound.io'
