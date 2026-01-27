@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
         - name: upload-server
-          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:31b95a0f2c385136282b00acdbdeb4ddfc009666119b9b9d6228c06b433c2fb0
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:f5eed3211120e17b492f358ac523dc00140380d92c617f9d9714ed6a93ffff56
           imagePullPolicy: IfNotPresent
           env:
+            - name: AWS_ENDPOINT
+              value: localstack.localstack:4566
             - name: tf-jobs-queue-url
               valueFrom:
                 secretKeyRef:
