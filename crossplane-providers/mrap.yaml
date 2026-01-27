@@ -7,4 +7,4 @@ spec:
   - vpcs.ec2.aws.m.upbound.io
   - '*.s3.aws.m.upbound.io'
   - '*.s3.aws.upbound.io'
-  - 'sqs.aws.m.upbound.io'
+  - 'queues.sqs.aws.m.upbound.io'
