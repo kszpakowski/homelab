@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: upload-server
-          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:f5eed3211120e17b492f358ac523dc00140380d92c617f9d9714ed6a93ffff56
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:1ce51a7f1977352827a4ff3508fcdacbc9e98737714bf56afe846d742cd220af
           imagePullPolicy: IfNotPresent
           env:
             - name: AWS_ENDPOINT
