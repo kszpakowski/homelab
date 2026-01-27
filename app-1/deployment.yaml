@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: uapp-1
+        app: app-1
     spec:
       containers:
         - name: upload-server
