@@ -4,6 +4,7 @@ metadata:
   name: app-1-controller
 spec:
   replicas: 2
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: app-1
@@ -12,7 +13,6 @@ spec:
       labels:
         app: app-1
     spec:
-      revisionHistoryLimit: 2
       containers:
         - name: controller
           image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:1e8a88f2e29b26c856cc79943d4ddd0702f5317240431911e0c618fe3758c014
