@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-1-controller
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-1
+  template:
+    metadata:
+      labels:
+        app: uapp-1
+    spec:
+      containers:
+        - name: upload-server
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: tf-jobs-queue-url
+              valueFrom:
+                secretKeyRef:
+                  name: tf-jobs-queue-conn
+                  key: queueURL
+          ports:
+            - name: api
+              containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
