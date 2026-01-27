@@ -21,7 +21,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: tf-jobs-queue-conn
-                  key: queueURL
+                  key: url
           ports:
             - name: api
               containerPort: 3000
