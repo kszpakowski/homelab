@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: upload-server
-          image: zot.homelab.kszpakowski.com/app-1-controller:latest@26066d0ad4011ef43a5b0e69cec871bbd3aae513ab7c3eb7d577e6d68a859889
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:26066d0ad4011ef43a5b0e69cec871bbd3aae513ab7c3eb7d577e6d68a859889
           imagePullPolicy: IfNotPresent
           env:
             - name: tf-jobs-queue-url
