@@ -4,7 +4,7 @@ metadata:
   name: tf-jobs
 spec:
   forProvider:
-    delaySeconds: 90
+    delaySeconds: 0
     maxMessageSize: 2048
     messageRetentionSeconds: 86400
     name: tf-jobs
