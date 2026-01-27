@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:1ce51a7f1977352827a4ff3508fcdacbc9e98737714bf56afe846d742cd220af
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:6727a240b36b59efb71fb1ea47402d85e0a79e6752e3985bc845e59b9eded3c4
           imagePullPolicy: IfNotPresent
           env:
             - name: AWS_ENDPOINT
