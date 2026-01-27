@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: controller
-          image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:1e8a88f2e29b26c856cc79943d4ddd0702f5317240431911e0c618fe3758c014
-          imagePullPolicy: IfNotPresent
+          image: zot.homelab.kszpakowski.com/app-1-controller:latest
+          imagePullPolicy: Always
           env:
             - name: AWS_ENDPOINT
               value: http://localstack.localstack:4566
