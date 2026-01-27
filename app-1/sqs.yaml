@@ -1,0 +1,16 @@
+apiVersion: sqs.aws.m.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: tf-jobs
+spec:
+  forProvider:
+    delaySeconds: 90
+    maxMessageSize: 2048
+    messageRetentionSeconds: 86400
+    name: tf-jobs
+    receiveWaitTimeSeconds: 10
+    region: us-west-1
+    tags:
+      service: app-1
+  writeConnectionSecretToRef:
+    name: tf-jobs-queue-conn
