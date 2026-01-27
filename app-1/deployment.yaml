@@ -13,7 +13,7 @@ spec:
         app: app-1
     spec:
       containers:
-        - name: upload-server
+        - name: controller
           image: zot.homelab.kszpakowski.com/app-1-controller:latest@sha256:1ce51a7f1977352827a4ff3508fcdacbc9e98737714bf56afe846d742cd220af
           imagePullPolicy: IfNotPresent
           env:
