@@ -9,7 +9,7 @@ patches:
       group: apps
       version: v1
       kind: StatefulSet
-      name: pocket-id-pocket-id
+      name: pocket-id
     patch: |
       - op: add
         path: /spec/template/spec/containers/0/envFrom/-
