@@ -1,5 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../../base
-- env-sealedsecret.yaml
+  - ../../base
+  - env-sealedsecret.yaml
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+      name: pcoket-id-pocket-id
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+          secretRef:
+            name: env

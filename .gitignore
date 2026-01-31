@@ -1,3 +1,4 @@
 .DS_Store
 local
 crossplane/base/charts
+pocket-id/base/charts
