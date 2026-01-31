@@ -18,15 +18,17 @@ spec:
             grafana.ini:
               server:
                 root_url: https://grafana.homelab.kszpakowski.com
-              auth.disable_login_form: true
-              auth.generic_oauth:
-                enabled: true
-                name: Pocket ID
-                allow_sign_up: true
-                client_id: ${OIDC_CLIENT_ID}
-                client_secret: ${OIDC_CLIENT_SECRET}
-                scopes: openid profile email
-                issuer: https://id.homelab.kszpakowski.com
+              auth:
+                disable_login_form: true
+                oauth_auto_login: true
+                generic_oauth:
+                  enabled: true
+                  name: Pocket ID
+                  allow_sign_up: true
+                  client_id: ${OIDC_CLIENT_ID}
+                  client_secret: ${OIDC_CLIENT_SECRET}
+                  scopes: openid profile email
+                  issuer: https://id.homelab.kszpakowski.com
             ingress:
               enabled: true
               hosts:
