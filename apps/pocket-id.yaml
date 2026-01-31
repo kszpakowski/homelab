@@ -8,24 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://anza-labs.github.io/charts
-    chart: pocket-id
-    targetRevision: 1.7.4
-    helm:
-      valuesObject:
-        analyticsDisabled: true
-        pocketID:
-          image:
-            tag: v2.2.0
-        ingress:
-          enabled: true
-          host: id.homelab.kszpakowski.com
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt
-          tls:
-            - secretName: pocket-id-cert
-              hosts:
-                - id.homelab.kszpakowski.com
+    repoURL: 'https://github.com/kszpakowski/homelab.git'
+    path: pocket-id/overlays/homelab
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: pocket-id
