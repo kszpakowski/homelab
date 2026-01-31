@@ -14,6 +14,18 @@ spec:
       helm:
         valuesObject:
           grafana:
+            envFromSecret: grafana-pocketid-oidc
+            grafana.ini:
+              server:
+                root_url: https://grafana.homelab.kszpakowski.com
+              auth.generic_oauth:
+                enabled: true
+                name: Pocket ID
+                allow_sign_up: true
+                client_id: $__env{OIDC_CLIENT_ID}
+                client_secret: $__env{OIDC_CLIENT_SECRET}
+                scopes: openid profile email
+                issuer: https://id.homelab.kszpakowski.com
             ingress:
               enabled: true
               hosts:
@@ -24,6 +36,9 @@ spec:
                 - hosts:
                     - grafana.homelab.kszpakowski.com
                   secretName: grafana-cert
+    - repoURL: 'https://github.com/kszpakowski/homelab.git'
+      path: ./victoria-metrics-k8s-stack
+      targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: vm-stack
