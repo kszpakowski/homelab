@@ -29,6 +29,7 @@ spec:
                 client_secret: ${OIDC_CLIENT_SECRET}
                 scopes: openid profile email
                 auth_url: https://id.homelab.kszpakowski.com/authorize
+                token_url: https://id.homelab.kszpakowski.com/api/oidc/token
                 api_url: https://id.homelab.kszpakowski.com/api/oidc/userinfo
             ingress:
               enabled: true
