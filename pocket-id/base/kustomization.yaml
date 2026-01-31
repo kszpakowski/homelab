@@ -4,7 +4,7 @@ helmCharts:
   - name: pocket-id
     repo: https://anza-labs.github.io/charts
     version: 1.7.4
-    releaseName: pcoket-id
+    releaseName: pocket-id
     namespace: pocket-id
     valuesInline:
       analyticsDisabled: true
