@@ -15,8 +15,7 @@ spec:
       valuesObject:
         ingress:
           enabled: true
-          hosts:
-            - id.homelab.kszpakowski.com
+          host: id.homelab.kszpakowski.com
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt
           tls:
