@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pocket-id
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://anza-labs.github.io/charts
+    chart: pocket-id
+    targetRevision: 1.7.4
+    helm:
+      valuesObject:
+        ingress:
+          enabled: true
+          hosts:
+            - id.homelab.kszpakowski.com
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          tls:
+            - secretName: pocket-id-cert
+              hosts:
+                - id.homelab.kszpakowski.com
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pocket-id
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
