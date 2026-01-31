@@ -18,6 +18,7 @@ spec:
             grafana.ini:
               server:
                 root_url: https://grafana.homelab.kszpakowski.com
+              auth.disable_login_form: true
               auth.generic_oauth:
                 enabled: true
                 name: Pocket ID
