@@ -8,3 +8,4 @@ spec:
   - '*.s3.aws.m.upbound.io'
   - '*.s3.aws.upbound.io'
   - 'queues.sqs.aws.m.upbound.io'
+  - 'serverlesscaches.elasticache.aws.m.upbound.io'
