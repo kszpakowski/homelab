@@ -1,0 +1,8 @@
+apiVersion: elasticache.aws.m.upbound.io/v1beta1
+kind: ServerlessCache
+metadata:
+  name: cache
+spec:
+  forProvider:
+    engine: redis
+    region: us-west-1
