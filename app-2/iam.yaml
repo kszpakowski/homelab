@@ -8,6 +8,3 @@ spec:
     description: Role for app-2 service
     # assumeRolePolicy: |
     # inlinePolicy: |
-
-  providerConfigRef:
-    name: aws-provider
