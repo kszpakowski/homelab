@@ -27,6 +27,8 @@ spec:
   forProvider:
     policyArnSelector:
       name: sqs-policy
+      labels:
+        service: app-2
     userSelector:
       matchLabels:
         service: app-2
