@@ -5,6 +5,7 @@ metadata:
   lables: 
     service: app-2
 spec:
+  forProvider: {}
   writeConnectionSecretToRef:
     name: app2-user-conn
 ---
