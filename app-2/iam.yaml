@@ -1,4 +1,4 @@
-apiVersion: iam.aws.upbound.io/v1beta1
+apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Role
 metadata:
   name: app-2-role
@@ -6,6 +6,8 @@ spec:
   forProvider:
     name: app-2-role
     description: Role for app-2 service
+    # assumeRolePolicy: |
+    # inlinePolicy: |
 
   providerConfigRef:
     name: aws-provider
