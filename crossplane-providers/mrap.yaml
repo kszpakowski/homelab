@@ -14,3 +14,4 @@ spec:
   - 'rolepolicyattachments.iam.aws.m.upbound.io'
   - 'users.iam.aws.m.upbound.io'
   - 'userpolicyattachments.iam.aws.m.upbound.io'
+  - 'accesskeys.iam.aws.m.upbound.io'

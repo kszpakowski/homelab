@@ -6,8 +6,20 @@ metadata:
     service: app-2
 spec:
   forProvider: {}
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: AccessKey
+metadata:
+  lables: 
+    service: app-2
+  name: app2-user-access-key
+spec:
+  forProvider:
+    userSelector:
+      matchLabels:
+        service: app-2
   writeConnectionSecretToRef:
-    name: app2-user-conn
+    name: app2-user-access-key-conn
 ---
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: Policy
