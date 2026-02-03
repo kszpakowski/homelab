@@ -3,6 +3,7 @@ kind: Policy
 metadata:
   labels:
     service: app-2
+    res: sqs
   name: sqs-policy
 spec:
   forProvider:
@@ -26,9 +27,9 @@ metadata:
 spec:
   forProvider:
     policyArnSelector:
-      name: sqs-policy
       matchLabels:
         service: app-2
+        res: sqs
     userSelector:
       matchLabels:
         service: app-2
