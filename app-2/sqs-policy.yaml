@@ -19,3 +19,14 @@ spec:
         ]
       }
 ---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: UserPolicyAttachment
+metadata:
+  name: app2-user-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      name: sqs-policy
+    userSelector:
+      matchLabels:
+        service: app-2
