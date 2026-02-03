@@ -36,7 +36,7 @@ spec:
           {
               "Sid": "AllowAssumeRole",
               "Effect": "Allow",
-              "Action": "sts:AssumeRole"
+              "Action": "sts:AssumeRole",
               "Resource": "*"
           }
         ]
