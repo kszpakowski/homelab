@@ -1,0 +1,21 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: Policy
+metadata:
+  labels:
+    service: app-2
+  name: sqs-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "List SQS Queues",
+              "Effect": "Allow",
+              "Action": "sqs:ListQueues",
+              "Resource": "*"
+          }
+        ]
+      }
+---
