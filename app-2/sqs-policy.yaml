@@ -22,7 +22,7 @@ spec:
 apiVersion: iam.aws.m.upbound.io/v1beta1
 kind: UserPolicyAttachment
 metadata:
-  name: app2-user-policy-attachment
+  name: app2-user-policy-attachment-sqs
 spec:
   forProvider:
     policyArnSelector:
