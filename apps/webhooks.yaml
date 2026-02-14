@@ -1,3 +1,4 @@
+# TODO migrate multisource to kustomize overlays
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,7 +17,7 @@ spec:
       helm:
         valuesObject:
           image:
-            pullPolict: Always
+            pullPolicy: Always
           env:
           - name: GITHUB_WEBHOOK_SECRET
             valueFrom:
