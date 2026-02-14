@@ -15,3 +15,5 @@ spec:
   - 'users.iam.aws.m.upbound.io'
   - 'userpolicyattachments.iam.aws.m.upbound.io'
   - 'accesskeys.iam.aws.m.upbound.io'
+  - 'topics.sns.aws.m.upbound.io'
+  - 'topicsubscriptions.sns.aws.m.upbound.io'
