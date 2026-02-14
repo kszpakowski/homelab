@@ -12,7 +12,7 @@ stringData:
 apiVersion: aws.m.upbound.io/v1beta1
 kind: ClusterProviderConfig
 metadata:
-  name: localstack
+  name: default
 spec:
   endpoint:
     hostnameImmutable: true
