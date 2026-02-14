@@ -10,8 +10,8 @@ spec:
     namespace: webhooks
     server: 'https://kubernetes.default.svc'
   source:
-    repoURL: oci://zot.homelab.kszpakowski.com/webhooks
-    chart: webhooks
+    repoURL: oci://zot.homelab.kszpakowski.com/webhooks/webhooks
+    path: .
     targetRevision: 1.0.0
     helm:
       valuesObject: {}
