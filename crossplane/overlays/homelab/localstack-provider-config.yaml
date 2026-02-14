@@ -16,7 +16,7 @@ metadata:
 spec:
   endpoint:
     hostnameImmutable: true
-    services: [ec2, iam, s3, sqs, sts, elasticache]
+    services: [ec2, iam, s3, sqs, sns, sts, elasticache]
     url:
       type: Static
       static: http://localstack.localstack:4566
