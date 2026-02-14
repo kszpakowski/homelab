@@ -20,19 +20,19 @@ spec:
             pullPolicy: Always
           env:
           - name: AWS_ENDPOINT
-              value: http://localstack.localstack:4566
+            value: http://localstack.localstack:4566
           - name: AWS_REGION
-              value: us-west-1
+            value: us-west-1
           - name: AWS_ACCESS_KEY_ID
-              valueFrom:
-                secretKeyRef:
-                  name: webhooks-user-access-key-conn
-                  key: username
+            valueFrom:
+              secretKeyRef:
+                name: webhooks-user-access-key-conn
+                key: username
           - name: AWS_SECRET_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: webhooks-user-access-key-conn
-                  key: password
+            valueFrom:
+              secretKeyRef:
+                name: webhooks-user-access-key-conn
+                key: password
           - name: GITHUB_WEBHOOK_SECRET
             valueFrom:
               secretKeyRef:
