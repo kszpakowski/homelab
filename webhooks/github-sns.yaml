@@ -1,0 +1,12 @@
+apiVersion: sns.aws.m.upbound.io/v1beta1
+kind: Topic
+metadata:
+  labels:
+    app: webhooks
+  name: webhooks-github
+  namespace: webhooks
+spec:
+  forProvider:
+    region: us-west-1
+  writeConnectionSecretToRef:
+    name: webhooks-github-sns
