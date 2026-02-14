@@ -9,12 +9,21 @@ spec:
   destination:
     namespace: webhooks
     server: 'https://kubernetes.default.svc'
-  source:
-    repoURL: oci://zot.homelab.kszpakowski.com/webhooks/webhooks
-    path: .
-    targetRevision: 1.0.0
-    helm:
-      valuesObject: {}
+  sources:
+    - repoURL: oci://zot.homelab.kszpakowski.com/webhooks/webhooks
+      path: .
+      targetRevision: 1.0.0
+      helm:
+        valuesObject:
+          env:
+          - name: GITHUB_WEBHOOK_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: github-webhooks-secret
+                key: SECRET
+    - repoUrl: https://github.com/kszpakowski/homelab.git
+      targetRevision: HEAD
+      path: ./webhooks
   project: default
   syncPolicy:
     automated:
