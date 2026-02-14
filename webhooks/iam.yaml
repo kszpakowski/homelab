@@ -1,0 +1,22 @@
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: User
+metadata:
+  name: webhooks-user
+  labels: 
+    service: webhooks
+spec:
+  forProvider: {}
+---
+apiVersion: iam.aws.m.upbound.io/v1beta1
+kind: AccessKey
+metadata:
+  labels: 
+    service: webhooks
+  name: webhooks-user-access-key
+spec:
+  forProvider:
+    userSelector:
+      matchLabels:
+        service: webhooks
+  writeConnectionSecretToRef:
+    name: webhooks-user-access-key-conn
