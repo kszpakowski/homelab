@@ -7,23 +7,28 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      repoURL: https://github.com/kszpakowski/homelab.git
-      revision: HEAD
-      directories:
-      - path: applications/*
+    - git:
+        repoURL: https://github.com/kszpakowski/homelab.git
+        revision: HEAD
+        directories:
+          - path: applications/*
   template:
     metadata:
-      name: '{{.path.basename}}'
+      name: "{{.path.basename}}"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: "default"
       source:
         repoURL: https://github.com/kszpakowski/homelab.git
         targetRevision: HEAD
-        path: '{{.path.path}}/overlays/homelab'
+        path: "{{.path.path}}/overlays/homelab"
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: "{{.path.basename}}"
       syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
