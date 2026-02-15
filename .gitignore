@@ -2,3 +2,4 @@
 local
 crossplane/base/charts
 pocket-id/base/charts
+applications/*/base/charts
