@@ -25,9 +25,9 @@ RAW_APP_NAME="$(prompt_default "App name" "my-app")"
 APP_NAME="$(sanitize_name "$RAW_APP_NAME")"
 
 APP_DIR="./applications/${APP_NAME}"
-BASE_DIR="${APP_DIR}/base"
-OVERLAY_DIR="${APP_DIR}/overlays/kustomize"
 
+
+BASE_DIR="${APP_DIR}/base"
 mkdir -p ${BASE_DIR}
 cat > "$BASE_DIR/kustomization.yaml" <<EOF
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -45,13 +45,11 @@ resources: []
 EOF
 
 
-
+OVERLAY_DIR="${APP_DIR}/overlays/kustomize"
 mkdir -p ${OVERLAY_DIR}
-
 cat > "$OVERLAY_DIR/kustomization.yaml" <<EOF
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../../base
-
 EOF
