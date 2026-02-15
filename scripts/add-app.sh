@@ -45,7 +45,7 @@ resources: []
 EOF
 
 
-OVERLAY_DIR="${APP_DIR}/overlays/kustomize"
+OVERLAY_DIR="${APP_DIR}/overlays/homelab"
 mkdir -p ${OVERLAY_DIR}
 cat > "$OVERLAY_DIR/kustomization.yaml" <<EOF
 apiVersion: kustomize.config.k8s.io/v1beta1
