@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: ccm
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: kube-system
