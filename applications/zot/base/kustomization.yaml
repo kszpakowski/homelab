@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: zot
+    repo: http://zotregistry.dev/helm-charts
+    version: 0.1.79
+    releaseName: zot
+    namespace: zot
+    valuesInline:
+      persistence: true
+      pvc:
+        create: true
+        size: 200Gi
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: zot.homelab.kszpakowski.com
+            paths:
+              - path: /
+        tls:
+          - secretName: zot-cert
+            hosts:
+              - zot.homelab.kszpakowski.com
