@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - crossplane-providers/aws-iam.yaml
+  - crossplane-providers/aws-sns.yaml
+  - crossplane-providers/aws-sqs.yaml
+  - crossplane-providers/mrap.yaml
