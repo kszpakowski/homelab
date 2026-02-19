@@ -20,3 +20,6 @@ helmCharts:
           - secretName: pocket-id-cert
             hosts:
               - id.homelab.kszpakowski.com
+      persistence:
+        data:
+          enabled: true
