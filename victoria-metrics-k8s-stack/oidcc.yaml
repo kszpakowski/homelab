@@ -1,0 +1,13 @@
+apiVersion: pocketid.dev/v1alpha1
+kind: OIDCClient
+metadata:
+  name: grafana
+spec:
+  pocketIDRef:
+    name: homelab
+    namespace: pocketid-system
+  clientName: Grafana
+  applicationURL: https://grafana.homelab.kszpakowski.com/
+  redirectURL: https://grafana.homelab.kszpakowski.com/login/generic_oauth
+  clientID: grafana
+  secretName: grafana-oidc
