@@ -12,7 +12,7 @@ spec:
       helm:
         valuesObject:
           grafana:
-            envFromSecret: grafana-pocketid-oidc
+            envFromSecret: grafana-oidc
             grafana.ini:
               server:
                 root_url: https://grafana.homelab.kszpakowski.com
@@ -23,12 +23,12 @@ spec:
                 enabled: true
                 name: Pocket ID
                 allow_sign_up: true
-                client_id: ${OIDC_CLIENT_ID}
-                client_secret: ${OIDC_CLIENT_SECRET}
+                client_id: ${client_id}
+                client_secret: ${client_secret}
+                auth_url: ${auth_url}
+                token_url: ${token_url}
+                api_url: ${api_url}
                 scopes: openid profile email
-                auth_url: https://id.homelab.kszpakowski.com/authorize
-                token_url: https://id.homelab.kszpakowski.com/api/oidc/token
-                api_url: https://id.homelab.kszpakowski.com/api/oidc/userinfo
             ingress:
               enabled: true
               hosts:
