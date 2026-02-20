@@ -3,7 +3,7 @@ kind: PocketID
 metadata:
   name: homelab
 spec:
-  url: https://pocketid.example.com
+  url: https://id.homelab.kszpakowski.com
   apiKeyRef:
     name: pocketid-api-key
     key: apiKey
