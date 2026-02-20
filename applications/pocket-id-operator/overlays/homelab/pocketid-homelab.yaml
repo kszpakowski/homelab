@@ -1,0 +1,9 @@
+apiVersion: pocketid.dev/v1alpha1
+kind: PocketID
+metadata:
+  name: homelab
+spec:
+  url: https://pocketid.example.com
+  apiKeyRef:
+    name: pocketid-api-key
+    key: apiKey
