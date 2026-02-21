@@ -9,49 +9,60 @@ spec:
     apiVersion: platform.kszpakowski.com/v1alpha1
     kind: XWebApp
   writeConnectionSecretsToNamespace: crossplane-system
-  resources:
-    - name: repository
-      base:
-        apiVersion: repo.github.upbound.io/v1alpha1
-        kind: Repository
-        spec:
-          forProvider:
-            visibility: private
-            deleteBranchOnMerge: true
-            hasIssues: true
-            hasProjects: false
-            hasWiki: false
-            vulnerabilityAlerts: true
-            template:
-              - owner: kszpakowski
-                repository: template-go-webapp
-                includeAllBranches: false
-          providerConfigRef:
-            name: github
-      patches:
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.parameters.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-repo"
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.parameters.name
-          toFieldPath: metadata.annotations[crossplane.io/external-name]
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.parameters.name
-          toFieldPath: spec.forProvider.name
-        - type: FromCompositeFieldPath
-          fromFieldPath: spec.parameters.type
-          toFieldPath: spec.forProvider.template[0].repository
-          transforms:
-            - type: map
-              map:
-                go: template-go-webapp
-                node: template-node-webapp
-                react: template-react-webapp
-      connectionDetails:
-        - type: FromFieldPath
-          name: repositoryURL
-          fromFieldPath: status.atProvider.htmlUrl
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: repository
+            base:
+              apiVersion: repo.github.upbound.io/v1alpha1
+              kind: Repository
+              spec:
+                forProvider:
+                  visibility: private
+                  deleteBranchOnMerge: true
+                  hasIssues: true
+                  hasProjects: false
+                  hasWiki: false
+                  vulnerabilityAlerts: true
+                  template:
+                    - owner: kszpakowski
+                      repository: template-go-webapp
+                      includeAllBranches: false
+                providerConfigRef:
+                  name: github
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.name
+                toFieldPath: metadata.name
+                transforms:
+                  - type: string
+                    string:
+                      fmt: "%s-repo"
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.name
+                toFieldPath: metadata.annotations[crossplane.io/external-name]
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.name
+                toFieldPath: spec.forProvider.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.type
+                toFieldPath: spec.forProvider.template[0].repository
+                transforms:
+                  - type: map
+                    map:
+                      go: template-go-webapp
+                      node: template-node-webapp
+                      react: template-react-webapp
+            connectionDetails:
+              - type: FromFieldPath
+                name: repositoryURL
+                fromFieldPath: status.atProvider.htmlUrl
+    - step: auto-ready
+      functionRef:
+        name: function-auto-ready
