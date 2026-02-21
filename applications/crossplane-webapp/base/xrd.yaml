@@ -8,6 +8,8 @@ spec:
     kind: XWebApp
     plural: xwebapps
   scope: Namespaced
+  defaultCompositionRef:
+    name: xwebapp.github.platform.kszpakowski.com
   versions:
     - name: v1alpha1
       served: true

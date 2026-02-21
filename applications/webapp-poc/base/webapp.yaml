@@ -3,9 +3,6 @@ kind: XWebApp
 metadata:
   name: webapp-poc
 spec:
-  compositionSelector:
-    matchLabels:
-      provider: github
   parameters:
     name: webapp-poc
     type: go
