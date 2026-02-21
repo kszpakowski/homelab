@@ -4,4 +4,5 @@ resources:
   - crossplane-providers/aws-iam.yaml
   - crossplane-providers/aws-sns.yaml
   - crossplane-providers/aws-sqs.yaml
+  - crossplane-providers/github.yaml
   - crossplane-providers/mrap.yaml

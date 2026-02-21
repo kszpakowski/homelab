@@ -17,3 +17,4 @@ spec:
   - 'accesskeys.iam.aws.m.upbound.io'
   - 'topics.sns.aws.m.upbound.io'
   - 'topicsubscriptions.sns.aws.m.upbound.io'
+  - '*.github.upbound.io'
