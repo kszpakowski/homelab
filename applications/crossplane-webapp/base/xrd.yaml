@@ -1,0 +1,42 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xwebapps.platform.kszpakowski.com
+spec:
+  group: platform.kszpakowski.com
+  names:
+    kind: XWebApp
+    plural: xwebapps
+  claimNames:
+    kind: WebApp
+    plural: webapps
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: GitHub repository name to create.
+                      pattern: '^[a-z0-9]([-a-z0-9]*[a-z0-9])?$'
+                    type:
+                      type: string
+                      description: Logical web app template type.
+                      enum:
+                        - go
+                        - node
+                        - react
+                  required:
+                    - name
+                    - type
+              required:
+                - parameters
