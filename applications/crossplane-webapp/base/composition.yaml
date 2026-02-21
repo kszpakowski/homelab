@@ -43,6 +43,7 @@ spec:
                 transforms:
                   - type: string
                     string:
+                      type: Format
                       fmt: "%s-repo"
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.name
