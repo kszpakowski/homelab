@@ -7,7 +7,7 @@ spec:
   names:
     kind: XWebApp
     plural: xwebapps
-  scope: Namespaced
+  scope: Cluster
   defaultCompositionRef:
     name: xwebapp.github.platform.kszpakowski.com
   versions:
