@@ -33,3 +33,16 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+          - RespectIgnoreDifferences=true
+      ignoreDifferences:
+        - group: apps
+          kind: StatefulSet
+          name: "{{ .path.basename }}"
+          jqPathExpressions:
+            - .spec.volumeClaimTemplates[]?.apiVersion
+            - .spec.volumeClaimTemplates[]?.kind
+        - group: apps
+          kind: StatefulSet
+          name: "{{ .path.basename }}"
+          jsonPointers:
+            - /spec/updateStrategy/rollingUpdate/maxUnavailable
