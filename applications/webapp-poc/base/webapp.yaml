@@ -1,0 +1,11 @@
+apiVersion: platform.kszpakowski.com/v1alpha1
+kind: XWebApp
+metadata:
+  name: webapp-poc
+spec:
+  compositionSelector:
+    matchLabels:
+      provider: github
+  parameters:
+    name: webapp-poc
+    type: go
