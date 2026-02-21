@@ -14,11 +14,13 @@ patches:
       version: v1
       kind: Deployment
       name: crossplane-apollo
+      namespace: crossplane-system
     patch: |
       apiVersion: apps/v1
       kind: Deployment
       metadata:
         name: crossplane-apollo
+        namespace: crossplane-system
       spec:
         template:
           spec:
