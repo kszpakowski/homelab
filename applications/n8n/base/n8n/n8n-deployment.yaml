@@ -62,7 +62,7 @@ spec:
               value: "true"
             # - name: N8N_SECURE_COOKIE
               # value: "false"
-          image: n8nio/n8n:1.119.2
+          image: n8nio/n8n:1.123.23
           name: n8n
           ports:
             - containerPort: 5678
