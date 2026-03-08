@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playwright-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playwright-mcp
+  template:
+    metadata:
+      labels:
+        app: playwright-mcp
+    spec:
+      containers:
+        - name: playwright-mcp
+          image: mcr.microsoft.com/playwright:latest
+          command:
+            - sh
+            - -c
+          args:
+            - npx @playwright/mcp@latest --port 8931
+          ports:
+            - name: mcp
+              containerPort: 8931
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
