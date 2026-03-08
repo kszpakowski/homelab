@@ -21,7 +21,7 @@ spec:
           workingDir: /data
           command:
             - node
-            - cli.js
+            - /app/cli.js
           args:
             - --headless
             - --browser
