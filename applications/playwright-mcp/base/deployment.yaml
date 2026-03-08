@@ -22,6 +22,7 @@ spec:
             - --headless
             - --browser
             - chromium
+            - --isolated
             - --no-sandbox
             - --port
             - "8931"
