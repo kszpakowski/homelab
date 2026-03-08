@@ -14,12 +14,19 @@ spec:
     spec:
       containers:
         - name: playwright-mcp
-          image: mcr.microsoft.com/playwright:latest
+          image: mcr.microsoft.com/playwright/mcp:latest
           command:
-            - sh
-            - -c
+            - node
+            - cli.js
           args:
-            - npx @playwright/mcp@latest --port 8931
+            - --headless
+            - --browser
+            - chromium
+            - --no-sandbox
+            - --port
+            - "8931"
+            - --host
+            - 0.0.0.0
           ports:
             - name: mcp
               containerPort: 8931
