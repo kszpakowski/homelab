@@ -23,11 +23,11 @@ spec:
             - node
             - /app/cli.js
           args:
-            - --headless
+            # - --headless
             - --browser
             - chromium
-            - --isolated
-            - --no-sandbox
+            # - --isolated
+            # - --no-sandbox
             - --port
             - "8931"
             - --host
