@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gtc-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gtc-mcp
+  template:
+    metadata:
+      labels:
+        app: gtc-mcp
+    spec:
+      volumes:
+        - name: cache
+          emptyDir: {}
+      containers:
+        - name: gtc-mcp
+          image: zot.homelab.kszpakowski.com/gtc-mcp:latest
+          env:
+            - name: MCP_TRANSPORT
+              value: streamable-http
+            - name: MCP_HOST
+              value: 0.0.0.0
+            - name: MCP_PORT
+              value: "8000"
+            - name: MCP_STREAMABLE_HTTP_PATH
+              value: /mcp
+            - name: GTC_CACHE_DIR
+              value: /data/cache
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          volumeMounts:
+            - name: cache
+              mountPath: /data/cache
