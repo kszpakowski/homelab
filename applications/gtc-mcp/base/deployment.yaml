@@ -18,6 +18,7 @@ spec:
       containers:
         - name: gtc-mcp
           image: zot.homelab.kszpakowski.com/gtc-mcp:latest
+          imagePullPolicy: Always
           env:
             - name: MCP_TRANSPORT
               value: streamable-http
@@ -25,6 +26,8 @@ spec:
               value: 0.0.0.0
             - name: MCP_PORT
               value: "8000"
+            - name: MCP_ALLOWED_HOSTS
+              value: gtc-mcp.gtc-mcp:8000
             - name: MCP_STREAMABLE_HTTP_PATH
               value: /mcp
             - name: GTC_CACHE_DIR
