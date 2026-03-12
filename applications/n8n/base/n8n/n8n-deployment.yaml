@@ -54,6 +54,10 @@ spec:
               value: "5678"
             - name: N8N_EDITOR_BASE_URL
               value: https://n8n.homelab.kszpakowski.com
+            - name: WEBHOOK_URL
+              value: https://webhooks.kszpakowski.com/n8n/
+            - name: N8N_PROXY_HOPS
+              value: "1"
             - name: N8N_RUNNERS_ENABLED
               value: "true"
             - name: N8N_BLOCK_ENV_ACCESS_IN_NODE
