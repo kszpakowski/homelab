@@ -9,6 +9,11 @@ helmCharts:
     valuesInline:
       image:
         pullPolicy: Always
+      proxyRoutes:
+        - sourceHost: webhooks.kszpakowski.com
+          sourcePrefix: /n8n
+          targetOrigin: https://n8n.homelab.kszpakowski.com
+          targetPrefix: /
       env:
         - name: AWS_ENDPOINT
           value: http://localstack.localstack:4566
