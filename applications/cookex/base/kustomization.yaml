@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: cookex
+    repo: oci://zot.homelab.kszpakowski.com/cookex
+    version: 0.1.0
+    releaseName: cookex
+    namespace: cookex
+    valuesInline:
+      image:
+        pullPolicy: Always
+      persistence:
+        enabled: true
+      ingress:
+        enabled: true
+        className: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: cookex.homelab.kszpakowski.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: cookex-cert
+            hosts:
+              - cookex.homelab.kszpakowski.com
