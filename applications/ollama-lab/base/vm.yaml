@@ -1,0 +1,111 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: ubuntu-ollama
+  namespace: ollama-lab
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        app: ubuntu-ollama
+        kubevirt.io/domain: ubuntu-ollama
+        kubevirt.io/vm: ubuntu-ollama
+    spec:
+      terminationGracePeriodSeconds: 180
+      domain:
+        cpu:
+          cores: 4
+        devices:
+          disks:
+            - name: rootdisk
+              disk:
+                bus: virtio
+            - name: ollama-data
+              disk:
+                bus: virtio
+            - name: cloudinitdisk
+              disk:
+                bus: virtio
+          interfaces:
+            - name: default
+              masquerade: {}
+              ports:
+                - name: ollama
+                  port: 11434
+          rng: {}
+        resources:
+          requests:
+            memory: 8Gi
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - name: rootdisk
+          containerDisk:
+            image: quay.io/containerdisks/ubuntu:24.04
+        - name: ollama-data
+          emptyDisk:
+            capacity: 30Gi
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              hostname: ubuntu-ollama
+              package_update: true
+              package_upgrade: true
+              packages:
+                - curl
+                - ca-certificates
+                - qemu-guest-agent
+              users:
+                - name: ubuntu
+                  sudo: ALL=(ALL) NOPASSWD:ALL
+                  groups: sudo
+                  shell: /bin/bash
+                  lock_passwd: true
+              ssh_pwauth: false
+              disk_setup:
+                /dev/vdb:
+                  table_type: gpt
+                  layout: true
+                  overwrite: false
+              fs_setup:
+                - label: ollama-data
+                  filesystem: ext4
+                  device: /dev/vdb1
+              mounts:
+                - ["/dev/vdb1", "/var/lib/ollama", "ext4", "defaults,nofail", "0", "2"]
+              write_files:
+                - path: /usr/local/bin/configure-ollama.sh
+                  permissions: "0755"
+                  content: |
+                    #!/usr/bin/env bash
+                    set -euo pipefail
+                    mkdir -p /etc/systemd/system/ollama.service.d
+                    cat <<'EOF' >/etc/systemd/system/ollama.service.d/override.conf
+                    [Service]
+                    Environment="OLLAMA_HOST=0.0.0.0:11434"
+                    EOF
+                    systemctl daemon-reload
+                    systemctl enable --now ollama
+                - path: /usr/local/bin/bootstrap-ollama-model.sh
+                  permissions: "0755"
+                  content: |
+                    #!/usr/bin/env bash
+                    set -euo pipefail
+                    for _ in $(seq 1 30); do
+                      if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then
+                        exec /usr/local/bin/ollama pull qwen2.5:1.5b
+                      fi
+                      sleep 10
+                    done
+                    exit 1
+              runcmd:
+                - systemctl enable --now qemu-guest-agent
+                - curl -fsSL https://ollama.com/install.sh | sh
+                - /usr/local/bin/configure-ollama.sh
+                - systemctl enable --now systemd-resolved || true
+                - systemd-run --unit=bootstrap-ollama-model --property=After=ollama.service /usr/local/bin/bootstrap-ollama-model.sh
