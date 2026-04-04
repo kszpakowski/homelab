@@ -15,22 +15,7 @@ spec:
     spec:
       containers:
         - name: ollama
-          image: ollama/ollama:latest
-          command:
-            - /bin/sh
-            - -c
-          args:
-            - |
-              ollama serve &
-              server_pid=$!
-              for i in $(seq 1 60); do
-                if ollama list >/dev/null 2>&1; then
-                  break
-                fi
-                sleep 2
-              done
-              ollama pull qwen2.5:1.5b || true
-              wait "$server_pid"
+          image: ollama/ollama:0.20.2
           ports:
             - name: ollama
               containerPort: 11434
