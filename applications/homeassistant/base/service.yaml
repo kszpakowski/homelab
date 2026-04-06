@@ -3,7 +3,8 @@ kind: Service
 metadata:
   name: homeassistant
 spec:
+  type: ExternalName
+  externalName: 192-168-1-86.nip.io
   ports:
     - name: http
       port: 8123
-      targetPort: 8123

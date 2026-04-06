@@ -7,6 +7,11 @@ helmCharts:
     releaseName: traefik
     namespace: traefik
     valuesInline:
+      providers:
+        kubernetesCRD:
+          allowExternalNameServices: true
+        kubernetesIngress:
+          allowExternalNameServices: true
       ingressRoute:
         dashboard:
           enabled: true
