@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: usa
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - hosts:
+        - usa.homelab.kszpakowski.com
+      secretName: usa-cert
+  rules:
+    - host: usa.homelab.kszpakowski.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: usa
+                port:
+                  name: http
