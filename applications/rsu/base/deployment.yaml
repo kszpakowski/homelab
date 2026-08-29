@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rsu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rsu
+  template:
+    metadata:
+      labels:
+        app: rsu
+    spec:
+      containers:
+        - name: rsu
+          image: zot.homelab.kszpakowski.com/rsu-espp-dashboard:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
