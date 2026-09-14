@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+
+KEYCHAIN_SERVICE="${PROXMOX_KEYCHAIN_SERVICE:-homelab/proxmox/terraform-api-token}"
+KEYCHAIN_ACCOUNT="${PROXMOX_KEYCHAIN_ACCOUNT:-terraform@pve!homelab}"
+
+token="$(
+  security find-generic-password \
+    -a "$KEYCHAIN_ACCOUNT" \
+    -s "$KEYCHAIN_SERVICE" \
+    -w
+)"
+
+export PROXMOX_VE_ENDPOINT="${PROXMOX_VE_ENDPOINT:-https://192.168.1.2:8006/}"
+export PROXMOX_VE_API_TOKEN="$token"
+export PROXMOX_VE_INSECURE="${PROXMOX_VE_INSECURE:-true}"
+
+unset token
+exec terraform "$@"

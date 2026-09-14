@@ -1,0 +1,9 @@
+bucket       = "YOUR-TERRAFORM-STATE-BUCKET"
+key          = "homelab/proxmox/terraform.tfstate"
+region       = "eu-central-1"
+encrypt      = true
+use_lockfile = true
+
+# Recommended when the bucket uses a customer-managed KMS key:
+# kms_key_id = "arn:aws:kms:eu-central-1:ACCOUNT_ID:key/KEY_ID"
+

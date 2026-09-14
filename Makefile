@@ -13,3 +13,9 @@ seal:
 
 add-app:
 	@./scripts/add-app.sh
+
+tf-plan:
+	@cd ./terraform/proxmox && ./scripts/tf-with-keychain plan -out=talos-vms.tfplan
+
+tf-apply:
+	@cd ./terraform/proxmox && ./scripts/tf-with-keychain apply talos-vms.tfplan

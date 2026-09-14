@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -eu
+
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+
+"${script_dir}/tf-with-keychain" import 'proxmox_virtual_environment_vm.talos["control_plane_1"]' pve/100
+"${script_dir}/tf-with-keychain" import 'proxmox_virtual_environment_vm.talos["worker_1"]' pve/101
+"${script_dir}/tf-with-keychain" import 'proxmox_virtual_environment_vm.talos["worker_2"]' pve/102
+"${script_dir}/tf-with-keychain" import 'proxmox_virtual_environment_vm.talos["worker_3"]' pve/103
