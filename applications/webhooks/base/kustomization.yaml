@@ -16,7 +16,7 @@ helmCharts:
           targetPrefix: /
       env:
         - name: AWS_ENDPOINT
-          value: http://localstack.localstack:4566
+          value: http://floci.floci:4566
         - name: AWS_REGION
           value: us-west-1
         - name: AWS_ACCESS_KEY_ID

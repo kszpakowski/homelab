@@ -6,7 +6,7 @@ resources:
   - ingress.yaml
   - github-provider-config.yaml
   - github-provider-creds-sealedsecret.yaml
-  - localstack-provider-config.yaml
+  - floci-provider-config.yaml
 
 patches:
   - target:

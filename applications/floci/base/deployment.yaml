@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: floci
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: floci
+  template:
+    metadata:
+      labels:
+        app: floci
+    spec:
+      containers:
+        - name: floci
+          image: floci/floci:1.5.33
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4566
+          env:
+            - name: FLOCI_HOSTNAME
+              value: floci.floci.svc.cluster.local
+            - name: FLOCI_BASE_URL
+              value: http://floci.floci.svc.cluster.local:4566
+            - name: LOCALSTACK_PARITY
+              value: "true"
+            - name: FLOCI_STORAGE_MODE
+              value: persistent
+          readinessProbe:
+            httpGet:
+              path: /_floci/health
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /_floci/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: floci-data

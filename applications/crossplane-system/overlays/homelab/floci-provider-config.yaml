@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: localstack-creds
+  name: floci-creds
 stringData:
   credentials: |
     [default]
@@ -18,12 +18,12 @@ spec:
     services: [ec2, iam, s3, sqs, sns, sts, elasticache]
     url:
       type: Static
-      static: http://localstack.localstack:4566
+      static: http://floci.floci:4566
   credentials:
     source: Secret
     secretRef:
       namespace: crossplane-system
-      name: localstack-creds
+      name: floci-creds
       key: credentials
   skip_credentials_validation: true
   skip_metadata_api_check: true
