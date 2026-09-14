@@ -3,10 +3,11 @@ kind: Kustomization
 helmCharts:
   - name: zot
     repo: http://zotregistry.dev/helm-charts
-    version: 0.1.98
+    version: 0.1.124
     releaseName: zot
     namespace: zot
     valuesInline:
+      replicaCount: 3
       persistence: true
       pvc:
         create: true
