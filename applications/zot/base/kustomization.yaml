@@ -8,6 +8,10 @@ helmCharts:
     namespace: zot
     valuesInline:
       replicaCount: 1
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
       persistence: true
       pvc:
         create: true
