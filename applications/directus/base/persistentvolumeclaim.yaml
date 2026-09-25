@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: directus-uploads
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: proxmox-data-ext4
+  resources:
+    requests:
+      storage: 20Gi
+
