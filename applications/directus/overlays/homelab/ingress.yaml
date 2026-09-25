@@ -4,15 +4,15 @@ metadata:
   name: directus
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: travel-cms.homelab.kszpakowski.com
+    external-dns.alpha.kubernetes.io/hostname: cms.homelab.kszpakowski.com
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - travel-cms.homelab.kszpakowski.com
+        - cms.homelab.kszpakowski.com
       secretName: directus-cert
   rules:
-    - host: travel-cms.homelab.kszpakowski.com
+    - host: cms.homelab.kszpakowski.com
       http:
         paths:
           - path: /

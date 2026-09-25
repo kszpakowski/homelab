@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: directus-config
 data:
-  PUBLIC_URL: https://travel-cms.homelab.kszpakowski.com
+  PUBLIC_URL: https://cms.homelab.kszpakowski.com
 

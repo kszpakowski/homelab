@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ../../base
   - ingress.yaml
+  - bootstrap-admin-sealedsecret.yaml
+  - runtime-secrets-sealedsecret.yaml
 
 patches:
   - path: configmap-patch.yaml
