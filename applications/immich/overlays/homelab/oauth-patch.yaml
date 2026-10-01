@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich-server
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: configure-oauth
+          image: python:3.13-alpine
+          command: [python3, -c]
+          args:
+            - |
+              import json, os
+              from pathlib import Path
+              credentials = Path('/oidc')
+              config = {
+                  'oauth': {
+                      'enabled': True,
+                      'issuerUrl': credentials.joinpath('instance_url').read_text().strip(),
+                      'clientId': credentials.joinpath('client_id').read_text().strip(),
+                      'clientSecret': credentials.joinpath('client_secret').read_text().strip(),
+                      'scope': 'openid email profile',
+                      'buttonText': 'Sign in with Pocket ID',
+                      'autoRegister': True,
+                      'autoLaunch': False,
+                      'mobileOverrideEnabled': True,
+                      'mobileRedirectUri': 'https://immich.homelab.kszpakowski.com/api/oauth/mobile-redirect',
+                  },
+                  'passwordLogin': {'enabled': True},
+                  'server': {'externalDomain': 'https://immich.homelab.kszpakowski.com'},
+              }
+              os.umask(0o077)
+              Path('/config/immich.json').write_text(json.dumps(config))
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: oidc
+              mountPath: /oidc
+              readOnly: true
+            - name: config
+              mountPath: /config
+      containers:
+        - name: server
+          env:
+            - name: IMMICH_CONFIG_FILE
+              value: /config/immich.json
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+      volumes:
+        - name: oidc
+          secret:
+            secretName: immich-oidc
+        - name: config
+          emptyDir:
+            medium: Memory

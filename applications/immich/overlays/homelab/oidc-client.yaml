@@ -1,0 +1,15 @@
+apiVersion: pocketid.dev/v1alpha1
+kind: OIDCClient
+metadata:
+  name: immich
+spec:
+  pocketIDRef:
+    name: homelab
+    namespace: pocketid-system
+  clientName: Immich
+  applicationURL: https://immich.homelab.kszpakowski.com/
+  # The operator supports one URL. Scope the wildcard to this HTTPS host
+  # to cover auth/login, user-settings, and api/oauth/mobile-redirect.
+  redirectURL: https://immich.homelab.kszpakowski.com/**
+  clientID: immich
+  secretName: immich-oidc

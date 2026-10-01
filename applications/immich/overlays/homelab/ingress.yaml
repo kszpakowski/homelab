@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: immich
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/hostname: immich.homelab.kszpakowski.com
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - immich.homelab.kszpakowski.com
+      secretName: immich-cert
+  rules:
+    - host: immich.homelab.kszpakowski.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: immich-server
+                port:
+                  name: http
