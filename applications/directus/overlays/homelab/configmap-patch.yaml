@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: directus-config
-data:
-  PUBLIC_URL: https://cms.homelab.kszpakowski.com
-
