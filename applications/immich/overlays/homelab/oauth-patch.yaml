@@ -15,6 +15,15 @@ spec:
               from pathlib import Path
               credentials = Path('/oidc')
               config = {
+                  # Bound upload processing memory on the 8 GiB homelab nodes.
+                  'job': {
+                      'thumbnailGeneration': {'concurrency': 1},
+                      'metadataExtraction': {'concurrency': 2},
+                      'videoConversion': {'concurrency': 1},
+                      'smartSearch': {'concurrency': 1},
+                      'faceDetection': {'concurrency': 1},
+                      'ocr': {'concurrency': 1},
+                  },
                   'oauth': {
                       'enabled': True,
                       'issuerUrl': credentials.joinpath('instance_url').read_text().strip(),

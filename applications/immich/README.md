@@ -3,7 +3,7 @@
 The homelab ApplicationSet discovers `applications/immich/overlays/homelab`
 when these files are committed and pushed. No ApplicationSet changes are needed.
 
-The installation uses Immich server and machine learning v3.2.0, persistent
+The installation uses Immich server and machine learning v3.2.4, persistent
 Valkey job queues, and CloudNativePG 1.28 with PostgreSQL 18 and VectorChord.
 The database bootstrap creates VectorChord (including pgvector) and earthdistance
 before Immich connects. Requires Kubernetes image-volume support; the homelab
@@ -15,7 +15,7 @@ All volumes use `proxmox-data-ext4` and ReadWriteOnce access:
 
 | Data | Capacity |
 | --- | --- |
-| Originals, thumbnails, encoded videos, and Immich database dumps | 100 GiB |
+| Originals, thumbnails, encoded videos, and Immich database dumps | 250 GiB |
 | PostgreSQL | 20 GiB |
 | Machine-learning model cache | 10 GiB |
 | Valkey queues (AOF, fsync every second) | 1 GiB |
@@ -29,6 +29,14 @@ Persistence is not a backup; keep independent backups of both photos and databas
 Traefik serves `https://immich.homelab.kszpakowski.com`, with a certificate from
 the `letsencrypt` ClusterIssuer and DNS managed by external-dns. The entire root
 path goes to Immich, including its API and mobile uploads.
+
+## Upload processing
+
+The server requests 2 GiB memory and has a 5 GiB limit. CPU_CORES is fixed at 2,
+and thumbnail generation, video conversion, smart search, face detection, and OCR
+run one job at a time; metadata extraction runs two. These settings reduce memory
+spikes during bulk uploads on the 8 GiB nodes. The original 4 GiB limit was hit
+during photo processing (OOMKilled), causing repeated server restarts.
 
 ## Pocket ID
 
