@@ -20,6 +20,8 @@ spec:
         - name: server
           image: ghcr.io/immich-app/immich-server:v3.2.0
           env:
+            - name: CPU_CORES
+              value: "2"
             - name: TZ
               value: Europe/Warsaw
             - name: DB_HOSTNAME
@@ -61,9 +63,9 @@ spec:
           resources:
             requests:
               cpu: 250m
-              memory: 1Gi
+              memory: 2Gi
             limits:
-              memory: 4Gi
+              memory: 6Gi
           volumeMounts:
             - name: library
               mountPath: /data
