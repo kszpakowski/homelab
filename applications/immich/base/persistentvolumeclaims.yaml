@@ -9,7 +9,7 @@ spec:
   storageClassName: proxmox-data-ext4
   resources:
     requests:
-      storage: 250Gi
+      storage: 300Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
