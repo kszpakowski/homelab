@@ -3,7 +3,7 @@
 The homelab ApplicationSet discovers `applications/immich/overlays/homelab`
 when these files are committed and pushed. No ApplicationSet changes are needed.
 
-The installation uses Immich server and machine learning v3.2.4, persistent
+The installation uses Immich server and machine learning v3.3.0, persistent
 Valkey job queues, and CloudNativePG 1.28 with PostgreSQL 18 and VectorChord.
 The database bootstrap creates VectorChord (including pgvector) and earthdistance
 before Immich connects. Requires Kubernetes image-volume support; the homelab
