@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: runner-state
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: proxmox-data-ext4
+  resources:
+    requests:
+      storage: 40Gi

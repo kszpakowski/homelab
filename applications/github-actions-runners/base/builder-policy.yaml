@@ -1,0 +1,41 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: homelab-github-runners
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: [v1]
+        operations: [CREATE, UPDATE]
+        resources: [pods, pods/ephemeralcontainers]
+  validations:
+    - expression: "!has(object.spec.hostNetwork) || !object.spec.hostNetwork"
+      message: Host networking is forbidden for homelab runners
+    - expression: "!has(object.spec.hostPID) || !object.spec.hostPID"
+      message: Host PID namespaces are forbidden for homelab runners
+    - expression: "!has(object.spec.hostIPC) || !object.spec.hostIPC"
+      message: Host IPC namespaces are forbidden for homelab runners
+    - expression: "!has(object.spec.volumes) || object.spec.volumes.all(v, !has(v.hostPath))"
+      message: Host path mounts are forbidden for homelab runners
+    - expression: "object.spec.containers.all(c, !has(c.securityContext) || !has(c.securityContext.privileged) || !c.securityContext.privileged) && (!has(object.spec.initContainers) || object.spec.initContainers.all(c, !has(c.securityContext) || !has(c.securityContext.privileged) || !c.securityContext.privileged)) && (!has(object.spec.ephemeralContainers) || object.spec.ephemeralContainers.all(c, !has(c.securityContext) || !has(c.securityContext.privileged) || !c.securityContext.privileged))"
+      message: Privileged containers are forbidden for homelab runners
+    - expression: "object.spec.containers.all(c, !has(c.securityContext) || !has(c.securityContext.capabilities) || !has(c.securityContext.capabilities.add) || size(c.securityContext.capabilities.add) == 0) && (!has(object.spec.initContainers) || object.spec.initContainers.all(c, !has(c.securityContext) || !has(c.securityContext.capabilities) || !has(c.securityContext.capabilities.add) || size(c.securityContext.capabilities.add) == 0)) && (!has(object.spec.ephemeralContainers) || object.spec.ephemeralContainers.all(c, !has(c.securityContext) || !has(c.securityContext.capabilities) || !has(c.securityContext.capabilities.add) || size(c.securityContext.capabilities.add) == 0))"
+      message: Added Linux capabilities are forbidden for homelab runners
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: homelab-github-runners
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  policyName: homelab-github-runners
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: github-actions-runners

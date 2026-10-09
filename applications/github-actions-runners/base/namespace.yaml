@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: github-actions-runners
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    # A scoped admission policy separately forbids privileged containers and host access.
+    # This exemption permits rootless BuildKit's unconfined seccomp profile.
+    pod-security.kubernetes.io/enforce: privileged
