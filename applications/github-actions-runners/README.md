@@ -66,3 +66,13 @@ the offline runner in repository Settings / Actions / Runners and refresh the
 registration token. To remove a repository, delete its entries from
 `base/kustomization.yaml`, then remove its directory and sealed secret and remove
 the GitHub runner registration. Argo CD pruning deletes its PVC and workspace.
+
+## Talos worker prerequisite
+
+Talos disables user namespaces by default. Rootless BuildKit requires a nonzero
+`user.max_user_namespaces`. The narrowly scoped no-reboot patch in
+`talos/worker-rootless-builds.yaml` sets it to 65536 and labels configured workers.
+Runners schedule only on workers with that label. Apply it only to workers
+designated for builds, using the current cluster's Talos credentials.
+This setting permits unprivileged user namespaces on that worker; it does not
+grant containers privileged mode or host mounts.

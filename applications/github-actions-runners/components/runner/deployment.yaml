@@ -17,6 +17,7 @@ spec:
       automountServiceAccountToken: false
       nodeSelector:
         kubernetes.io/arch: amd64
+        homelab.kszpakowski.com/rootless-builds: "true"
       securityContext:
         fsGroup: 123
       initContainers:
