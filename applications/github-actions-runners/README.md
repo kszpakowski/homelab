@@ -10,8 +10,13 @@ The common component lives in `components/runner`. Instance kustomizations add a
 unique name prefix, selector and repository configuration. The runner uses the
 official GitHub image, keeps registration and workspace data on its PVC, and
 updates its runner binary automatically. Image builds use BuildKit running as
-UID 1000, with the OverlayFS snapshotter and no Docker daemon. The builder API
+UID 1000, with the native snapshotter and no Docker daemon. The builder API
 listens on pod loopback only; no Service, host mounts or Docker socket are used.
+
+Rootless OverlayFS was tested on the current Talos workers with BuildKit 0.34.0.
+The worker starts, but snapshot creation fails with `lchown: operation not
+permitted`, including a minimal Dockerfile with only `FROM` and `WORKDIR`.
+Keep native until this storage/user-namespace compatibility issue is resolved.
 
 BuildKit needs an unconfined seccomp profile to create user namespaces and uses
 `--oci-worker-no-process-sandbox`: build steps share the builder's process
