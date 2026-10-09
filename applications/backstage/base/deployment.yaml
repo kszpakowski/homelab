@@ -22,7 +22,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: backstage
-          image: zot.homelab.kszpakowski.com/backstage:sha-a15212a7edec7a9024931b7579d1b555c83494d1
+          image: zot.homelab.kszpakowski.com/backstage:sha-fd781c36d5273411bb53f56d4e5176ea10ccae0c
           ports:
             - name: http
               containerPort: 7007
