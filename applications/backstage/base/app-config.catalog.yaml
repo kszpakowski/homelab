@@ -4,4 +4,4 @@ catalog:
     - type: file
       target: ./catalog/homelab.yaml
     - type: file
-      target: /app/homelab-catalog/services.yaml
+      target: ./homelab-catalog/services.yaml
