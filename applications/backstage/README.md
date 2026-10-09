@@ -20,6 +20,23 @@ ID subject. The initial user is Karol. Add users in the Backstage source catalog
 GitHub integrations initially support public repositories only. TechDocs requires
 an external documentation publishing pipeline before documentation is available.
 
+## Initial service catalog
+
+The application image supplies the initial user, homelab group and system, and
+Backstage component. `base/catalog/services.yaml` adds Immich, n8n, Zot, and the
+homelab GitOps repository, owned by the existing homelab group. These entries
+include service, source, and [recovery runbook](../../docs/recovery.md) links.
+
+Kustomize generates a catalog ConfigMap and mounts it read-only. The additional
+configuration preserves the image's catalog location and adds the mounted file.
+The generated ConfigMap hash triggers a rollout when catalog content changes;
+an application image rebuild is not required.
+
+This repository is public. Catalog files must contain only public service
+metadata. Keep user identity annotations, credentials, private endpoints, and
+backup details outside this repository. Select **All** and clear catalog filters
+if entries do not appear under **Owned**.
+
 ## Verification
 
 ```sh

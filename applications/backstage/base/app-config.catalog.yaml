@@ -1,0 +1,7 @@
+catalog:
+  locations:
+    # Keep the identities and initial entities supplied by the application image.
+    - type: file
+      target: ./catalog/homelab.yaml
+    - type: file
+      target: /app/homelab-catalog/services.yaml

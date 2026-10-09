@@ -1,0 +1,83 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: immich
+  description: Photo and video library with automated media processing.
+  annotations:
+    backstage.io/source-location: url:https://github.com/kszpakowski/homelab/tree/main/applications/immich
+  tags: [homelab, gitops]
+  links:
+    - url: https://immich.homelab.kszpakowski.com
+      title: Open service
+    - url: https://github.com/kszpakowski/homelab/tree/main/applications/immich
+      title: Deployment source
+    - url: https://github.com/kszpakowski/homelab/blob/main/docs/recovery.md
+      title: Recovery runbook
+spec:
+  type: service
+  lifecycle: production
+  owner: group:default/homelab
+  system: homelab
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: n8n
+  description: Workflow automation service.
+  annotations:
+    backstage.io/source-location: url:https://github.com/kszpakowski/homelab/tree/main/applications/n8n
+  tags: [homelab, gitops]
+  links:
+    - url: https://n8n.homelab.kszpakowski.com
+      title: Open service
+    - url: https://github.com/kszpakowski/homelab/tree/main/applications/n8n
+      title: Deployment source
+    - url: https://github.com/kszpakowski/homelab/blob/main/docs/recovery.md
+      title: Recovery runbook
+spec:
+  type: service
+  lifecycle: production
+  owner: group:default/homelab
+  system: homelab
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: zot
+  description: Container image registry for homelab builds.
+  annotations:
+    backstage.io/source-location: url:https://github.com/kszpakowski/homelab/tree/main/applications/zot
+  tags: [homelab, gitops]
+  links:
+    - url: https://zot.homelab.kszpakowski.com
+      title: Open service
+    - url: https://github.com/kszpakowski/homelab/tree/main/applications/zot
+      title: Deployment source
+    - url: https://github.com/kszpakowski/homelab/blob/main/docs/recovery.md
+      title: Recovery runbook
+spec:
+  type: service
+  lifecycle: production
+  owner: group:default/homelab
+  system: homelab
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: homelab-gitops
+  description: Declarative application deployment and infrastructure configuration.
+  annotations:
+    backstage.io/source-location: url:https://github.com/kszpakowski/homelab
+  tags: [homelab, gitops]
+  links:
+    - url: https://argocd.homelab.kszpakowski.com
+      title: Argo CD
+    - url: https://github.com/kszpakowski/homelab
+      title: Deployment source
+    - url: https://github.com/kszpakowski/homelab/blob/main/docs/recovery.md
+      title: Recovery runbook
+spec:
+  type: library
+  lifecycle: production
+  owner: group:default/homelab
+  system: homelab

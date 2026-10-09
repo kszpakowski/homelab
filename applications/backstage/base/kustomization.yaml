@@ -6,3 +6,8 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+configMapGenerator:
+  - name: backstage-catalog
+    files:
+      - services.yaml=catalog/services.yaml
+      - app-config.catalog.yaml

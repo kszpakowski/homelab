@@ -23,6 +23,19 @@ spec:
       containers:
         - name: backstage
           image: zot.homelab.kszpakowski.com/backstage:sha-fd781c36d5273411bb53f56d4e5176ea10ccae0c
+          args:
+            - node
+            - packages/backend
+            - --config
+            - app-config.yaml
+            - --config
+            - app-config.production.yaml
+            - --config
+            - /app/homelab-catalog/app-config.catalog.yaml
+          volumeMounts:
+            - name: catalog
+              mountPath: /app/homelab-catalog
+              readOnly: true
           ports:
             - name: http
               containerPort: 7007
@@ -80,3 +93,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: [ALL]
+      volumes:
+        - name: catalog
+          configMap:
+            name: backstage-catalog
