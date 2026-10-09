@@ -1,0 +1,15 @@
+apiVersion: pocketid.dev/v1alpha1
+kind: OIDCClient
+metadata:
+  name: backstage
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  pocketIDRef:
+    name: homelab
+    namespace: pocketid-system
+  clientName: Backstage
+  applicationURL: https://backstage.homelab.kszpakowski.com
+  redirectURL: https://backstage.homelab.kszpakowski.com/api/auth/oidc/handler/frame
+  clientID: backstage
+  secretName: backstage-oidc
