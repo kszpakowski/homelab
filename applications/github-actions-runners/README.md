@@ -10,7 +10,7 @@ The common component lives in `components/runner`. Instance kustomizations add a
 unique name prefix, selector and repository configuration. The runner uses the
 official GitHub image, keeps registration and workspace data on its PVC, and
 updates its runner binary automatically. Image builds use BuildKit running as
-UID 1000, with the native snapshotter and no Docker daemon. The builder API
+UID 1000, with the OverlayFS snapshotter and no Docker daemon. The builder API
 listens on pod loopback only; no Service, host mounts or Docker socket are used.
 
 BuildKit needs an unconfined seccomp profile to create user namespaces and uses
