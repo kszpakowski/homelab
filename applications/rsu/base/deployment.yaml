@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: rsu
-          image: zot.homelab.kszpakowski.com/rsu-espp-dashboard:latest@sha256:8ea7d19e787af083f756740e669ac48e002b691c891dca0cedac9940da6510ec
+          image: zot.homelab.kszpakowski.com/rsu-espp-dashboard:latest@sha256:bc48573fae5c9d96065efab09d15042629b80e57c84e4925fc72e7a12d9ed479
           imagePullPolicy: Always
           ports:
             - name: http
