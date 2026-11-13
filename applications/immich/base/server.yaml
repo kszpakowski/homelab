@@ -63,7 +63,7 @@ spec:
           resources:
             requests:
               cpu: 250m
-              memory: 2Gi
+              memory: 6Gi
             limits:
               memory: 6Gi
           volumeMounts:
