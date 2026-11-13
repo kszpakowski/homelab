@@ -17,7 +17,7 @@ spec:
               config = {
                   # Bound upload processing memory on the 8 GiB homelab nodes.
                   'job': {
-                      'thumbnailGeneration': {'concurrency': 1},
+                      'thumbnailGeneration': {'concurrency': 2},
                       'metadataExtraction': {'concurrency': 2},
                       'videoConversion': {'concurrency': 1},
                       'smartSearch': {'concurrency': 1},
