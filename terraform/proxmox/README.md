@@ -2,7 +2,7 @@
 
 Terraform configuration for the Talos Kubernetes virtual machines running on a single Proxmox VE node.
 
-The project manages six Talos VMs on Proxmox node `pve`:
+The project manages seven Talos VMs on Proxmox node `pve`:
 
 | Key | VM ID | Proxmox name | Role |
 | --- | ---: | --- | --- |
@@ -12,6 +12,7 @@ The project manages six Talos VMs on Proxmox node `pve`:
 | `worker_1` | 101 | `talos-fd0-wmu` | Worker |
 | `worker_2` | 102 | `talos-ifo-72a` | Worker |
 | `worker_3` | 103 | `talos-fdj-mp6` | Worker |
+| `worker_4` | 107 | `talos-6r8-01a` | Worker |
 
 All VM definitions live in `locals.tf`. Shared defaults such as CPU, memory, boot disk size, storage, and QEMU guest agent settings are defined in `local.vm_defaults`; per-node values are defined in `local.talos_vm_overrides`.
 
@@ -154,7 +155,7 @@ VMs 100-103 were created before this Terraform project. Import them once before 
 ./scripts/import-existing-vms
 ```
 
-VMs 105 and 106 are regular Terraform-managed VMs and are created by `terraform apply` if they do not already exist.
+VMs 105-107 are regular Terraform-managed VMs and are created by `terraform apply` if they do not already exist.
 
 ## Planning and applying changes
 
@@ -189,6 +190,58 @@ To print control-plane addresses reported by the QEMU guest agent:
 ```sh
 ./scripts/tf-with-keychain output control_plane_addresses
 ```
+
+## Proxmox VM identity requirements
+
+Every `vm_id` must be unused across the entire Proxmox cluster before adding a
+Terraform resource. Do not infer availability from gaps in this repository or
+the Terraform state: an unmanaged VM can already own that ID. Check the Proxmox
+inventory first, for example on the Proxmox host:
+
+```sh
+pvesh get /cluster/resources --type vm --output-format yaml
+```
+
+The VM ID and node name are validated at different stages. `vm_id` is an input,
+not a generated value, so verify it against the Proxmox inventory before the
+first Terraform plan. The Talos hostname is generated during the first boot only
+when `machine.network.hostname` is unset.
+
+The preferred workflow is deterministic:
+
+1. Choose an unused `vm_id` and a node name.
+2. Use that node name for both the Terraform VM `name` and
+   `machine.network.hostname` in the Talos worker configuration.
+3. Create the VM, apply the Talos configuration, and verify the joined node.
+
+If a worker configuration without an explicit hostname is reused, use a
+two-phase workflow instead:
+
+1. Create the VM and apply the worker configuration.
+2. Read the generated Kubernetes node name with `kubectl get nodes -o wide`.
+3. Change the Terraform VM `name` to that exact value and apply the in-place
+   rename.
+4. Verify the topology labels and CSI registration shown below.
+
+The Proxmox cloud controller resolves nodes by name when the Kubernetes node has
+no Proxmox `providerID`, so the final Proxmox VM name must exactly match the
+Kubernetes node name.
+
+A mismatch leaves the node unmanaged by the cloud controller. The standard
+storage topology labels are then absent, the Proxmox CSI node plugin cannot
+register, and pods using existing Proxmox volumes cannot schedule on the node.
+After joining a worker, verify its identity and storage registration:
+
+```sh
+kubectl get node <node> -o wide
+kubectl get node <node> \
+  -o jsonpath='{.metadata.labels.topology\.kubernetes\.io/region}{" "}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}'
+kubectl get csinode <node> \
+  -o jsonpath='{.spec.drivers[*].name}{"\n"}'
+```
+
+For this cluster the expected topology is `homelab pve`, and the CSINode must
+list `csi.proxmox.sinextra.dev`.
 
 ## Talos node initialization
 

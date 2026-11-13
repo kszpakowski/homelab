@@ -40,6 +40,13 @@ locals {
       description       = null
       import_from_image = false
     }
+    worker_4 = {
+      vm_id             = 107
+      name              = "talos-6r8-01a"
+      role              = "worker"
+      description       = "Worker node"
+      import_from_image = true
+    }
     control_plane_2 = {
       vm_id             = 105
       name              = "talos-55b-wwu"
