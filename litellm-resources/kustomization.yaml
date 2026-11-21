@@ -4,4 +4,6 @@ namespace: litellm
 resources:
   - postgres-cluster.yaml
   - litellm-secrets-sealedsecret.yaml
+  - litellm-valkey-secret-sealedsecret.yaml
   - oidc-client.yaml
+  - valkey.yaml

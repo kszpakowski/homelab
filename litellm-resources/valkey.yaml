@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: litellm-valkey
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: proxmox-data-ext4
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm-valkey
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: litellm-valkey
+  template:
+    metadata:
+      labels:
+        app: litellm-valkey
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: configure
+          image: docker.io/valkey/valkey:9@sha256:70739f85ad2ee01a726a965584a0f94895f01b0c60b3cc8b0aeef11eaa6888cf
+          command: [sh, -c]
+          args:
+            - |
+              set -eu
+              password="$(cat /secret/password)"
+              printf '%s\n' \
+                'bind 0.0.0.0' \
+                'protected-mode yes' \
+                'port 6379' \
+                'dir /data' \
+                'appendonly yes' \
+                'appendfsync everysec' \
+                "requirepass ${password}" > /generated/valkey.conf
+              chmod 600 /generated/valkey.conf
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: secret
+              mountPath: /secret
+              readOnly: true
+            - name: config
+              mountPath: /generated
+      containers:
+        - name: valkey
+          image: docker.io/valkey/valkey:9@sha256:70739f85ad2ee01a726a965584a0f94895f01b0c60b3cc8b0aeef11eaa6888cf
+          command: [valkey-server]
+          args: [/etc/valkey-generated/valkey.conf]
+          env:
+            - name: VALKEYCLI_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-valkey-secret
+                  key: password
+          ports:
+            - name: redis
+              containerPort: 6379
+          readinessProbe:
+            exec:
+              command: [valkey-cli, ping]
+          livenessProbe:
+            exec:
+              command: [valkey-cli, ping]
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: config
+              mountPath: /etc/valkey-generated
+              readOnly: true
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: secret
+          secret:
+            secretName: litellm-valkey-secret
+        - name: config
+          emptyDir:
+            medium: Memory
+        - name: data
+          persistentVolumeClaim:
+            claimName: litellm-valkey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: litellm-valkey
+spec:
+  selector:
+    app: litellm-valkey
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: redis
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: litellm-valkey
+spec:
+  podSelector:
+    matchLabels:
+      app: litellm-valkey
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/component
+                operator: In
+                values: [gateway, backend]
+            matchLabels:
+              app.kubernetes.io/instance: litellm
+      ports:
+        - protocol: TCP
+          port: 6379

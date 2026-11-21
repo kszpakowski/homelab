@@ -37,6 +37,11 @@ spec:
               name: litellm-postgres-app
               usernameKey: username
               passwordKey: password
+        redis:
+          host: litellm-valkey
+          passwordSecret:
+            name: litellm-valkey-secret
+            passwordKey: password
         gateway:
           image:
             tag: v1.110.2
