@@ -14,9 +14,18 @@ spec:
     helm:
       releaseName: litellm
       valuesObject:
-        fullnameOverride: litellm
-        monolith:
+        fullnameOverride: litellm-app
+        ingress:
           enabled: true
+          className: traefik
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            external-dns.alpha.kubernetes.io/hostname: litellm.homelab.kszpakowski.com
+          host: litellm.homelab.kszpakowski.com
+          tls:
+            - hosts:
+                - litellm.homelab.kszpakowski.com
+              secretName: litellm-cert
         masterKey:
           secretName: litellm-secrets
           secretKey: master-key
@@ -29,6 +38,8 @@ spec:
               usernameKey: username
               passwordKey: password
         gateway:
+          image:
+            tag: v1.110.2
           replicaCount: 1
           hpa:
             enabled: false
@@ -46,10 +57,41 @@ spec:
             limits:
               cpu: "2"
               memory: 4Gi
+        backend:
+          image:
+            tag: v1.110.2
+          replicaCount: 1
+          hpa:
+            enabled: false
+          envSecrets:
+            - litellm-secrets
+          extraEnv:
+            - name: STORE_MODEL_IN_DB
+              value: "True"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 1Gi
+            limits:
+              cpu: "1"
+              memory: 2Gi
+        ui:
+          image:
+            tag: v1.110.2
+          replicaCount: 1
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
         serviceAccounts:
           gateway:
             automount: false
         migrationJob:
+          image:
+            tag: v1.110.2
           hooks:
             helm:
               enabled: false

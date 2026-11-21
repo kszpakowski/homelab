@@ -4,4 +4,3 @@ namespace: litellm
 resources:
   - postgres-cluster.yaml
   - litellm-secrets-sealedsecret.yaml
-  - ingress.yaml
