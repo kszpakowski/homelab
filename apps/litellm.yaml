@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: litellm
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/berriai/litellm/chart
+    chart: litellm
+    targetRevision: "1.0.0"
+    helm:
+      releaseName: litellm
+      valuesObject:
+        fullnameOverride: litellm
+        monolith:
+          enabled: true
+        masterKey:
+          secretName: litellm-secrets
+          secretKey: master-key
+        database:
+          writer:
+            host: litellm-postgres-rw
+            dbname: litellm
+            passwordSecret:
+              name: litellm-postgres-app
+              usernameKey: username
+              passwordKey: password
+        gateway:
+          replicaCount: 1
+          hpa:
+            enabled: false
+          keda:
+            enabled: false
+          envSecrets:
+            - litellm-secrets
+          extraEnv:
+            - name: STORE_MODEL_IN_DB
+              value: "True"
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+        serviceAccounts:
+          gateway:
+            automount: false
+        migrationJob:
+          hooks:
+            helm:
+              enabled: false
+            argocd:
+              enabled: true
+          backoffLimit: 12
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: litellm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
