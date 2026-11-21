@@ -1,0 +1,13 @@
+apiVersion: pocketid.dev/v1alpha1
+kind: OIDCClient
+metadata:
+  name: litellm
+spec:
+  pocketIDRef:
+    name: homelab
+    namespace: pocketid-system
+  clientName: LiteLLM
+  applicationURL: https://litellm.homelab.kszpakowski.com/
+  redirectURL: https://litellm.homelab.kszpakowski.com/sso/callback
+  clientID: litellm
+  secretName: litellm-oidc

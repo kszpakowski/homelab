@@ -50,6 +50,45 @@ spec:
           extraEnv:
             - name: STORE_MODEL_IN_DB
               value: "True"
+            - name: GENERIC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: client_id
+            - name: GENERIC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: client_secret
+            - name: GENERIC_AUTHORIZATION_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: auth_url
+            - name: GENERIC_TOKEN_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: token_url
+            - name: GENERIC_USERINFO_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: api_url
+            - name: PROXY_BASE_URL
+              value: https://litellm.homelab.kszpakowski.com
+            - name: GENERIC_SCOPE
+              value: openid profile email
+            - name: GENERIC_USER_ID_ATTRIBUTE
+              value: sub
+            - name: GENERIC_USER_EMAIL_ATTRIBUTE
+              value: email
+            - name: GENERIC_USER_DISPLAY_NAME_ATTRIBUTE
+              value: name
+            - name: GENERIC_USER_FIRST_NAME_ATTRIBUTE
+              value: given_name
+            - name: GENERIC_USER_LAST_NAME_ATTRIBUTE
+              value: family_name
           resources:
             requests:
               cpu: 500m
@@ -68,6 +107,45 @@ spec:
           extraEnv:
             - name: STORE_MODEL_IN_DB
               value: "True"
+            - name: GENERIC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: client_id
+            - name: GENERIC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: client_secret
+            - name: GENERIC_AUTHORIZATION_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: auth_url
+            - name: GENERIC_TOKEN_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: token_url
+            - name: GENERIC_USERINFO_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: litellm-oidc
+                  key: api_url
+            - name: PROXY_BASE_URL
+              value: https://litellm.homelab.kszpakowski.com
+            - name: GENERIC_SCOPE
+              value: openid profile email
+            - name: GENERIC_USER_ID_ATTRIBUTE
+              value: sub
+            - name: GENERIC_USER_EMAIL_ATTRIBUTE
+              value: email
+            - name: GENERIC_USER_DISPLAY_NAME_ATTRIBUTE
+              value: name
+            - name: GENERIC_USER_FIRST_NAME_ATTRIBUTE
+              value: given_name
+            - name: GENERIC_USER_LAST_NAME_ATTRIBUTE
+              value: family_name
           resources:
             requests:
               cpu: 250m
