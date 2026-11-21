@@ -49,6 +49,8 @@ spec:
             proxy_config:
               general_settings:
                 disable_env_credential_login: true
+                store_model_in_db: true
+                store_prompts_in_spend_logs: true
           replicaCount: 1
           hpa:
             enabled: false
