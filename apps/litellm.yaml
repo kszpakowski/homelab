@@ -40,6 +40,10 @@ spec:
         gateway:
           image:
             tag: v1.110.2
+          config:
+            proxy_config:
+              general_settings:
+                disable_env_credential_login: true
           replicaCount: 1
           hpa:
             enabled: false
